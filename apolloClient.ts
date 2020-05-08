@@ -13,5 +13,16 @@ export default function createApolloClient(initialState, ctx): ApolloClient<Norm
             fetch,
         }),
         cache: new InMemoryCache().restore(initialState),
+        defaultOptions: {
+            watchQuery: {
+                errorPolicy: 'ignore',
+            },
+            query: {
+                errorPolicy: 'all',
+            },
+            mutate: {
+                errorPolicy: 'all',
+            },
+        },
     });
 }
