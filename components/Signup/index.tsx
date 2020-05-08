@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { gql, useLazyQuery } from '@apollo/client';
 
-import { withApollo } from '../../lib/apollo';
+import { withRedirectUser, withApollo } from '../../with';
+
 import { SignupTeam } from './SignupTeam';
 
 const GET_TEAM_BY_NAME = gql`
@@ -54,4 +55,4 @@ export const Signup: React.FC<null> = () => {
     return <SignupTeam />;
 };
 
-export default withApollo({ ssr: true })(Signup);
+export default withRedirectUser(withApollo({ ssr: true })(Signup));

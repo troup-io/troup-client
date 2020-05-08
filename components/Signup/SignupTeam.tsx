@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
+import { AuthToken } from '../../services/Auth';
 
 type FormData = {
     email: string;
@@ -44,9 +45,10 @@ export const SignupTeam: React.FC<{}> = () => {
     const { handleSubmit, register } = useForm<FormData>();
 
     const submit = handleSubmit(async (variables) => {
-        await signupUser({
+        const result = (await signupUser({
             variables,
-        });
+        })) as any;
+        await AuthToken.storeToken(result.data?.token);
     });
 
     const rand = useRef(Math.floor(Math.random() * 100)).current;
