@@ -7,9 +7,7 @@ import { SignupTeam } from './SignupTeam';
 
 const GET_TEAM_BY_NAME = gql`
     query GET_TEAM_BY_NAME($name: String!) {
-        team(name: $name) {
-            id
-        }
+        teamIdFromName(name: $name)
     }
 `;
 
