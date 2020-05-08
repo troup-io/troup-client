@@ -14,15 +14,18 @@
     "dependencies": {
         "@apollo/client": "^3.0.0-beta.44",
         "isomorphic-unfetch": "^3.0.0",
+        "js-cookie": "^2.2.1",
+        "jwt-decode": "^2.2.0",
         "next": "latest",
+        "next-cookie": "^2.3.0",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-apollo": "^3.1.5",
-        "react-cookie": "^4.0.3",
         "react-dom": "^16.13.1",
         "react-hook-form": "^5.6.0"
     },
     "devDependencies": {
+        "@types/js-cookie": "^2.2.6",
         "@types/node": "^13.13.4",
         "@types/react": "^16.9.34",
         "@typescript-eslint/eslint-plugin": "^2.30.0",
