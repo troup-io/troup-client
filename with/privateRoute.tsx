@@ -14,13 +14,8 @@ export function withPrivateRoute(WrappedComponent: any): React.ComponentType<Aut
             const auth = new AuthToken(token);
             const initialProps = { auth };
 
-            console.log('req url', ctx.req.url);
-
             if (auth.isExpired) {
                 redirectToLogin(ctx.res);
-            } else {
-                console.log('req url', ctx.req.url);
-                // redirectToDashboard(ctx.res);
             }
 
             if (WrappedComponent.getInitialProps) {

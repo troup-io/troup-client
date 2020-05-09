@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 
 import { withRedirectUser, withApollo } from '../../with';
 
@@ -16,17 +16,12 @@ export const Signup: React.FC<null> = () => {
     const {
         query: { name },
     } = useRouter();
-    const [getTeam, { data, error, loading }] = useLazyQuery(GET_TEAM_BY_NAME, {
+    const { data, error, loading } = useQuery(GET_TEAM_BY_NAME, {
         variables: {
             name,
         },
+        skip: !name,
     });
-
-    useEffect(() => {
-        if (name) {
-            getTeam();
-        }
-    }, [getTeam, name]);
 
     if (loading) {
         return <>Loading..</>;
@@ -48,7 +43,7 @@ export const Signup: React.FC<null> = () => {
         );
     }
 
-    if (name && data) {
+    if (name) {
         return <div>Team signup</div>;
     }
 

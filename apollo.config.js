@@ -6,7 +6,7 @@ module.exports = {
     client: {
         service: {
             name: 'troup-localhost',
-            url: 'http://localhost:4000/',
+            url: 'http://localhost:4000/graphql',
             skipSSLValidation: true,
         },
         includes: ['./pages/**/*.tsx'],
