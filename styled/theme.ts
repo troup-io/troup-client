@@ -5,7 +5,8 @@ const colors = {
     white,
     black,
     primaryLight: '#38F9D7',
-    primaryDark: '#4FACFE',
+    // primaryDark: '#4FACFE',
+    primaryDark: 'red',
     secondary: '#45415E',
 
     // light schemes
@@ -32,7 +33,7 @@ const colors = {
 const variables = {
     margin: 10,
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 7,
     fontSize: 14,
     fontBody: 'sans-serif',
     fontHeader: 'serif',

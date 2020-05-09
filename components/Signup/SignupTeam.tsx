@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { AuthToken } from '../../services/Auth';
+import { Button } from '../../styled/components/Button';
+import { Input } from '../../styled/components/Input';
 
 type FormData = {
     email: string;
@@ -54,10 +56,22 @@ export const SignupTeam: React.FC<{}> = () => {
     const rand = useRef(Math.floor(Math.random() * 100)).current;
 
     return (
-        <>
-            <form onSubmit={!loading ? submit : undefined}>
+        <div
+            style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexFlow: 'column',
+                width: 500,
+                height: '100%',
+                margin: '0 auto',
+            }}
+        >
+            <form style={{ width: '100%' }} onSubmit={!loading ? submit : undefined}>
+                Hello World
                 <p>
-                    <input
+                    <Input
+                        placeholder="Email"
                         type="email"
                         name="email"
                         defaultValue={`samrith_${rand}@me.com`}
@@ -65,7 +79,8 @@ export const SignupTeam: React.FC<{}> = () => {
                     />
                 </p>
                 <p>
-                    <input
+                    <Input
+                        placeholder="Password"
                         type="password"
                         name="password"
                         defaultValue="helloworld"
@@ -73,7 +88,8 @@ export const SignupTeam: React.FC<{}> = () => {
                     />
                 </p>
                 <p>
-                    <input
+                    <Input
+                        placeholder="First Name"
                         type="text"
                         name="firstName"
                         defaultValue={`Samrith ${rand}`}
@@ -81,7 +97,8 @@ export const SignupTeam: React.FC<{}> = () => {
                     />
                 </p>
                 <p>
-                    <input
+                    <Input
+                        placeholder="Last Name"
                         type="text"
                         name="lastName"
                         defaultValue={`Shankar ${rand}`}
@@ -89,16 +106,17 @@ export const SignupTeam: React.FC<{}> = () => {
                     />
                 </p>
                 <p>
-                    <input
+                    <Input
+                        placeholder="Team Name"
                         type="text"
                         name="teamName"
                         defaultValue={`team-${rand}`}
                         ref={register({ required: true })}
                     />
                 </p>
-                <button type="submit" disabled={loading}>
+                <Button type="submit" disabled={loading}>
                     {loading ? 'Loading..' : 'Submit'}
-                </button>
+                </Button>
             </form>
             {data && (
                 <pre
@@ -114,6 +132,6 @@ export const SignupTeam: React.FC<{}> = () => {
                 </pre>
             )}
             {error && error?.message}
-        </>
+        </div>
     );
 };
