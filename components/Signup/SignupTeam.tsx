@@ -30,7 +30,7 @@ const SIGNUP_USER_MUTATION = gql`
         ) {
             user {
                 id
-                teams {
+                ownerTeams {
                     id
                     name
                 }
