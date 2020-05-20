@@ -25,7 +25,11 @@ const LOGIN_MUTATION = gql`
         signinUser(email: $email, password: $password) {
             user {
                 id
-                teams {
+                ownerTeams {
+                    id
+                    name
+                }
+                memberTeams {
                     id
                     name
                 }
