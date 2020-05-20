@@ -17,8 +17,8 @@
         "paths": {
             "@images/*": ["public/images/*"],
             "@components/*": ["components/*"],
-            "@atoms/*": ["styled/atoms/*"],
-            "@molecules/*": ["styled/molecules/*"],
+            "@atoms/*": ["system/atoms/*"],
+            "@molecules/*": ["system/molecules/*"],
             "@styled/*": ["styled/*"],
             "@services/*": ["services/*"],
             "@with/*": ["with/*"],
