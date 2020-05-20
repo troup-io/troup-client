@@ -24,9 +24,10 @@
             "@with/*": ["with/*"],
             "@hooks/*": ["hooks/*"],
             "@utils": ["utils/index"],
-            "@utils/*": ["utils/*"]
+            "@utils/*": ["utils/*"],
+            "@server-types/*": ["server-types/*"]
         }
     },
-    "exclude": ["node_modules", "generated/**/*.ts"],
+    "exclude": ["node_modules", "__generated__/global-types.ts"],
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

@@ -9,7 +9,7 @@
         "dev": "next",
         "build": "next build",
         "start": "next start",
-        "codegen": "yarn apollo codegen:generate --target typescript --outputFlat generated --passthroughCustomScalars --customScalarsPrefix Troup --addTypeName",
+        "codegen": "yarn apollo codegen:generate --target typescript --includes='{components,pages}/**/*.tsx' --tagName gql --globalTypesFile __generated__/global-types.ts --tsFileExtension d.ts --outputFlat server-types",
         "lint": "eslint components --ext .ts,.tsx,.json,.js"
     },
     "resolutions": {

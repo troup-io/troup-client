@@ -18,7 +18,8 @@
 # misc
 .DS_Store
 .env*
-generated
+__generated__
+server-types
 
 # debug
 npm-debug.log*

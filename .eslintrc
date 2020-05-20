@@ -24,7 +24,12 @@
     "rules": {
         "no-unused-expressions": "off",
         "require-await": "error",
-        "camelcase": "error",
+        "camelcase": [
+            "error",
+            {
+                "ignoreImports": true
+            }
+        ],
         "default-case": "error",
         "eqeqeq": "error",
         "prefer-template": "error",

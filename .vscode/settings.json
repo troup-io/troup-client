@@ -36,7 +36,9 @@
         "**/node_modules": true,
         "**/.next": true,
         "**/yarn.lock": true,
-        "**/yarn-error.log": true
+        "**/yarn-error.log": true,
+        "**/server-types": true,
+        "**/__generated__": true
     },
     "search.exclude": {
         "**/node_modules": true,
@@ -44,6 +46,8 @@
         "**/*.code-search": true,
         "**/yarn.lock": true,
         "**/.eslintrc": true,
-        "**/cmd": true
+        "**/cmd": true,
+        "**/server-types": true,
+        "**/__generated__": true
     }
 }
