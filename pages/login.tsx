@@ -1,10 +1,19 @@
 import React from 'react';
 import { useMutation, gql } from '@apollo/client';
+import Head from 'next/head';
 import { useForm } from 'react-hook-form';
+import { Flex, Text, Heading } from '@primer/components';
 
-import { AuthToken } from '../services/Auth';
+import { AuthToken } from '@services/Auth';
 
-import { withRedirectUser, withApollo } from '../with';
+import { withRedirectUser } from '@with/redirectUser';
+import { withApollo } from '@with/apollo';
+
+import { ButtonPrimary } from '@atoms/Button';
+import { Input } from '@atoms/Input';
+import { Link } from '@atoms/Link';
+
+import { Loading } from '@molecules/Loading';
 
 type FormData = {
     email: string;
@@ -28,10 +37,9 @@ const LOGIN_MUTATION = gql`
 
 const Login: React.FC<{ auth: any }> = () => {
     const { handleSubmit, register } = useForm<FormData>();
-    const [loginUser, opts] = useMutation(LOGIN_MUTATION, {
+    const [loginUser, { loading, error }] = useMutation(LOGIN_MUTATION, {
         errorPolicy: 'none',
     });
-    const { loading, error, data } = opts;
 
     const submit = handleSubmit(async (data) => {
         const result = (await loginUser({
@@ -41,44 +49,51 @@ const Login: React.FC<{ auth: any }> = () => {
     });
 
     return (
-        <>
-            <form onSubmit={!loading ? submit : undefined}>
-                <p>
-                    <input
-                        type="email"
-                        name="email"
-                        defaultValue="samrith_47@me.com"
-                        ref={register({ required: true })}
-                    />
-                </p>
-                <p>
-                    <input
-                        type="password"
-                        name="password"
-                        defaultValue="helloworld"
-                        ref={register({ required: true })}
-                    />
-                </p>
-                <button type="submit" disabled={loading}>
+        <Flex
+            maxWidth={350}
+            height="100%"
+            m="auto"
+            p="0 20px"
+            flexDirection="column"
+            justifyContent="center"
+        >
+            <Head>
+                <title>Login - Troup</title>
+                <meta name="title" content="Troiup / Login" />
+                <meta name="description" content="Description to go with OG:Title" />
+            </Head>
+            {loading && <Loading />}
+            <Heading fontSize={5} mb={4}>
+                Login
+            </Heading>
+            <form style={{ width: '100%' }} onSubmit={!loading ? submit : undefined}>
+                <Input
+                    mb={3}
+                    label="Email"
+                    type="email"
+                    name="email"
+                    defaultValue="samrith_47@me.com"
+                    ref={register({ required: true })}
+                    autoFocus
+                />
+                <Input
+                    mb={3}
+                    label="Password"
+                    type="password"
+                    name="password"
+                    defaultValue="helloworld"
+                    ref={register({ required: true })}
+                />
+                <ButtonPrimary type="submit" disabled={loading} fullWidth mb={4}>
                     {loading ? 'Loading..' : 'Submit'}
-                </button>
+                </ButtonPrimary>
+                <Text>
+                    Not a user? <Link href={`/signup`}>Register now!</Link>
+                </Text>
+                {error && error?.message}
             </form>
-            {data && (
-                <pre
-                    style={{
-                        padding: 10,
-                        background: '#111',
-                        color: 'lime',
-                        overflowY: 'auto',
-                        borderRadius: 10,
-                    }}
-                >
-                    {JSON.stringify(data, null, 2)}
-                </pre>
-            )}
-            {error && error?.message}
-        </>
+        </Flex>
     );
 };
 
-export default withRedirectUser(withApollo({ ssr: true })(Login));
+export default withRedirectUser(withApollo({ ssr: false })(Login));
