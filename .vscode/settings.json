@@ -33,9 +33,10 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/node_modules": false,
+        "**/node_modules": true,
         "**/.next": true,
-        "**/yarn.lock": true
+        "**/yarn.lock": true,
+        "**/yarn-error.log": true
     },
     "search.exclude": {
         "**/node_modules": true,

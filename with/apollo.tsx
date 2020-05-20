@@ -2,7 +2,8 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/client';
-import createApolloClient from '../apolloClient';
+
+import createApolloClient from '@utils/apolloClient';
 
 // On the client, we store the Apollo Client in the following variable.
 // This prevents the client from reinitializing between page transitions.
