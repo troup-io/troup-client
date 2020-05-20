@@ -21,7 +21,7 @@ type FormData = {
 };
 
 const LOGIN_MUTATION = gql`
-    mutation LOGIN_MUTATION($email: String!, $password: String!) {
+    mutation SigninUser($email: String!, $password: String!) {
         signinUser(email: $email, password: $password) {
             user {
                 id

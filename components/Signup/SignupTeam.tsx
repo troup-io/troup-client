@@ -21,7 +21,7 @@ type FormData = {
 };
 
 const SIGNUP_TEAM = gql`
-    mutation SIGNUP_TEAM(
+    mutation SignupTeam(
         $email: String!
         $password: String!
         $firstName: String!

@@ -17,7 +17,7 @@ import { SignupTeam } from './SignupTeam';
 import { SignupUser } from './SignupUser';
 
 const GET_TEAM_BY_NAME = gql`
-    query GET_TEAM_BY_NAME($name: String!) {
+    query GetTeamByName($name: String!) {
         teamDetailsFromName(name: $name) {
             id
             name
