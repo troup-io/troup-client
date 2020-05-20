@@ -1,9 +1,16 @@
 import React, { useRef } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { AuthToken } from '../../services/Auth';
-import { Button } from '../../styled/components/Button';
-import { Input } from '../../styled/components/Input';
+import { Flex, Text } from '@primer/components';
+
+import { AuthToken } from '@services/Auth';
+
+import { useMutation } from '@hooks/useMutation';
+
+import { ButtonPrimary } from '@atoms/Button';
+import { Input } from '@atoms/Input';
+
+import { Loading } from '@molecules/Loading';
 
 type FormData = {
     email: string;
@@ -13,8 +20,8 @@ type FormData = {
     teamName: string;
 };
 
-const SIGNUP_USER_MUTATION = gql`
-    mutation SIGNUP_MUTATION(
+const SIGNUP_TEAM = gql`
+    mutation SIGNUP_TEAM(
         $email: String!
         $password: String!
         $firstName: String!
@@ -41,97 +48,76 @@ const SIGNUP_USER_MUTATION = gql`
 `;
 
 export const SignupTeam: React.FC<{}> = () => {
-    const [signupUser, { data, error, loading }] = useMutation(SIGNUP_USER_MUTATION, {
+    const [signupTeam, { error, loading }] = useMutation(SIGNUP_TEAM, {
         errorPolicy: 'none',
     });
     const { handleSubmit, register } = useForm<FormData>();
 
     const submit = handleSubmit(async (variables) => {
-        const result = (await signupUser({
+        const result = (await signupTeam({
             variables,
         })) as any;
-        await AuthToken.storeToken(result.data?.token);
+        await AuthToken.storeToken(result?.data?.signupTeam?.token);
     });
 
     const rand = useRef(Math.floor(Math.random() * 100)).current;
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexFlow: 'column',
-                width: 500,
-                height: '100%',
-                margin: '0 auto',
-            }}
-        >
-            <form style={{ width: '100%' }} onSubmit={!loading ? submit : undefined}>
-                Hello World
-                <p>
-                    <Input
-                        placeholder="Email"
-                        type="email"
-                        name="email"
-                        defaultValue={`samrith_${rand}@me.com`}
-                        ref={register({ required: true })}
-                    />
-                </p>
-                <p>
-                    <Input
-                        placeholder="Password"
-                        type="password"
-                        name="password"
-                        defaultValue="helloworld"
-                        ref={register({ required: true })}
-                    />
-                </p>
-                <p>
-                    <Input
-                        placeholder="First Name"
-                        type="text"
-                        name="firstName"
-                        defaultValue={`Samrith ${rand}`}
-                        ref={register({ required: true })}
-                    />
-                </p>
-                <p>
-                    <Input
-                        placeholder="Last Name"
-                        type="text"
-                        name="lastName"
-                        defaultValue={`Shankar ${rand}`}
-                        ref={register({ required: true })}
-                    />
-                </p>
-                <p>
-                    <Input
-                        placeholder="Team Name"
-                        type="text"
-                        name="teamName"
-                        defaultValue={`team-${rand}`}
-                        ref={register({ required: true })}
-                    />
-                </p>
-                <Button type="submit" disabled={loading}>
-                    {loading ? 'Loading..' : 'Submit'}
-                </Button>
-            </form>
-            {data && (
-                <pre
-                    style={{
-                        padding: 10,
-                        background: '#111',
-                        color: 'lime',
-                        overflowY: 'auto',
-                        borderRadius: 10,
-                    }}
-                >
-                    {JSON.stringify(data, null, 2)}
-                </pre>
-            )}
+        <form style={{ width: '100%' }} onSubmit={!loading ? submit : undefined}>
+            {loading && <Loading size={50} />}
+            <Input
+                marginBottom={3}
+                label="Email"
+                type="email"
+                name="email"
+                block
+                defaultValue={`samrith_${rand}@me.com`}
+                ref={register({ required: true })}
+                autoFocus
+            />
+            <Input
+                marginBottom={3}
+                label="Password"
+                type="password"
+                name="password"
+                block
+                defaultValue="helloworld"
+                ref={register({ required: true })}
+            />
+            <Input
+                marginBottom={3}
+                label="First Name"
+                type="text"
+                name="firstName"
+                block
+                defaultValue={`Samrith ${rand}`}
+                ref={register({ required: true })}
+            />
+            <Input
+                marginBottom={3}
+                label="Last Name"
+                type="text"
+                name="lastName"
+                block
+                defaultValue={`Shankar ${rand}`}
+                ref={register({ required: true })}
+            />
+            <Input
+                marginBottom={3}
+                label="Team Name"
+                type="text"
+                name="teamName"
+                block
+                defaultValue={`team-${rand}`}
+                ref={register({ required: true })}
+            />
+            <Flex alignItems="center" justifyContent="space-between">
+                <Text></Text>
+            </Flex>
+            <ButtonPrimary type="submit" disabled={loading} mb={4}>
+                {loading ? 'Loading..' : 'Submit'}
+            </ButtonPrimary>
             {error && error?.message}
-        </div>
+        </form>
     );
 };
