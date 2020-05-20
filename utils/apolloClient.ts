@@ -8,7 +8,7 @@ export default function createApolloClient(initialState, ctx): ApolloClient<Norm
     return new ApolloClient({
         ssrMode: Boolean(ctx),
         link: new HttpLink({
-            uri: 'http://localhost:4000/graphql', // Server URL (must be absolute)
+            uri: process.env.SERVER_ENDPOINT, // Server URL (must be absolute)
             // credentials: 'include', // Additional fetch() options like `credentials` or `headers`
             fetch,
         }),
