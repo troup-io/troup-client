@@ -1,53 +1,54 @@
-# Apollo Example
+<p align="center"><img src="https://repository-images.githubusercontent.com/259775937/548b6b00-9a47-11ea-864f-a6d905f657c6" alt="troup-banner" width="300" /></p>
 
-[Apollo](https://www.apollographql.com/client/) is a GraphQL client that allows you to easily query the exact data you need from a GraphQL server. In addition to fetching and mutating data, Apollo analyzes your queries and their results to construct a client-side cache of your data, which is kept up to date as further queries and mutations are run, fetching more results from the server.
+# Troup Client
 
-In this simple example, we integrate Apollo seamlessly with Next by wrapping our `pages/index.js` inside a [higher-order component (HOC)](https://facebook.github.io/react/docs/higher-order-components.html). Using the HOC pattern we're able to pass down a central store of query result data created by Apollo into our React component hierarchy defined inside each page of our Next application.
+> ### 📢 We are looking for contributors!
+>
+> This project is under heavy development and is on the lookout for contributors both technical and ono-technical. If you are interested in understanding the product and contributing, do get in touch at hello@troupapp.com.
 
-On initial page load, while on the server and inside `getInitialProps`, we invoke the Apollo method, [`getDataFromTree`](https://www.apollographql.com/docs/react/api/react-ssr/#getdatafromtree). This method returns a promise; at the point in which the promise resolves, our Apollo Client store is completely initialized.
+The Troup client is the frontend app that helps the user address problems that we aim to solve. The client is built on a ton of wonderful open-source projects with the goal of providing a fluid experience to the user.
 
-This example relies on [graph.cool](https://www.graph.cool) for its GraphQL backend.
+**Languages:**
 
-Note: Do not be alarmed that you see two renders being executed. Apollo recursively traverses the React render tree looking for Apollo query components. When it has done that, it fetches all these queries and then passes the result to a cache. This cache is then used to render the data on the server side (another React render).
-https://www.apollographql.com/docs/react/api/react-ssr/#getdatafromtree
+-   [Typescript][typescript]
 
-## Deploy your own
+**Framework:**
 
-Deploy the example using [Vercel](https://vercel.com):
+-   [Next][next]
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/zeit/next.js/tree/canary/examples/with-apollo)
+**Libraries:**
 
-_Live Example: https://next-with-apollo.now.sh_
+-   [Apollo Client][apollo-client]
 
-## How to use
+**Design system:**
 
-### Using `create-next-app`
+-   [Styled Components][styled-components]
+-   [Primer Components][primer-components]
 
-Execute [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+## Available scripts
 
-```bash
-npm init next-app --example with-apollo with-apollo-app
-# or
-yarn create next-app --example with-apollo with-apollo-app
-```
+### `yarn dev`
 
-### Download manually
+Start the development server and watch for file changes.
 
-Download the example:
+### `yarn build`
 
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-apollo
-cd with-apollo
-```
+Build the production-optimised bundle for deployment.
 
-Install it and run:
+### `yarn start`
 
-```bash
-npm install
-npm run dev
-# or
-yarn
-yarn dev
-```
+Deploy the production-optimised bundle locally to test and simulate the production environment.
 
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### `yarn codegen`
+
+Generate the types from the server. If you have the Apollo plugin for VS Code it should do this automatically, but this generation is an alternate way of generating the code.
+
+### `yarn lint`
+
+Run the linter, catching out any errors or warning that may occur.
+
+[typescript]: https://www.typescriptlang.org/
+[next]: https://www.nextjs.org
+[apollo-client]: https://www.apollographql.com/docs/react/v3.0-beta
+[styled-components]: https://styled-components.com/
+[primer-components]: https://primer.style/
