@@ -1,4 +1,4 @@
-import { AuthToken } from '../services/Auth';
+import { AuthToken } from '@services/Auth';
 
 export type AuthProps = {
     auth: AuthToken;

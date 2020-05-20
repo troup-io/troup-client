@@ -1,5 +1,7 @@
 import React from 'react';
-import { withApollo, withPrivateRoute } from '../with';
+
+import { withPrivateRoute } from '@with/privateRoute';
+import { withApollo } from '@with/apollo';
 
 const Dashboard: React.FC<{}> = () => {
     return <div>This is the homepage accessible only after login!</div>;

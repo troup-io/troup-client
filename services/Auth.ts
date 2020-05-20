@@ -14,10 +14,9 @@ export class AuthToken {
         this.decodedToken = { userId: '', expiry: 0 };
 
         try {
-            console.log('token', !!token);
             this.decodedToken = jwtDecode(token);
         } catch (e) {
-            console.warn('Invalid or bad token.', token);
+            return;
         }
     }
 
