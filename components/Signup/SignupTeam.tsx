@@ -114,7 +114,7 @@ export const SignupTeam: React.FC<{}> = () => {
             <Flex alignItems="center" justifyContent="space-between">
                 <Text></Text>
             </Flex>
-            <ButtonPrimary type="submit" disabled={loading} mb={4}>
+            <ButtonPrimary type="submit" disabled={loading} fullWidth mb={4}>
                 {loading ? 'Loading..' : 'Submit'}
             </ButtonPrimary>
             {error && error?.message}

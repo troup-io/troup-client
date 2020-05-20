@@ -6,7 +6,7 @@ import { Input } from './Input';
 
 import { color, borderRadius, margin, boxShadow, padding } from '@styled/helper';
 
-export interface SelectOptionDefinition<T = string | number | boolean> {
+export interface SelectOptionDefinition<T = any> {
     label: string;
     value: T;
     divider?: boolean;
@@ -20,6 +20,8 @@ type SelectProps<T = string | number | boolean> = SelectMenuProps & {
     closeOnSelect?: boolean;
     autoFocus?: boolean;
     label?: string;
+    name?: string;
+    innerRef?: React.Ref<any>;
     onChange?: {
         (option: SelectOptionDefinition<T>): void;
     };
@@ -90,6 +92,8 @@ export const SelectInner: React.FC<SelectProps> = ({
     autoFocus,
     placeholder,
     label,
+    name,
+    innerRef,
     onChange,
 }) => {
     const isMounted = useRef(false);
@@ -130,6 +134,7 @@ export const SelectInner: React.FC<SelectProps> = ({
                 {!hasLabel && (
                     <span data-role="content">{placeholder || 'Select an option..'}</span>
                 )}
+                <input type="hidden" value={selected.value} name={name} ref={innerRef} />
             </SelectSummaryStyle>
             <SelectMenuModalStyle>
                 {!!header && <SelectMenu.Header>{header}</SelectMenu.Header>}
@@ -155,7 +160,7 @@ export const SelectInner: React.FC<SelectProps> = ({
     );
 };
 
-export const Select: React.FC<SelectProps> = (props) => {
+export const Select: React.FC<SelectProps> = React.forwardRef((props, ref) => {
     const {
         options,
         defaultValue,
@@ -165,6 +170,7 @@ export const Select: React.FC<SelectProps> = (props) => {
         autoFocus,
         placeholder,
         label,
+        name,
         onChange,
         ...rest
     } = props;
@@ -178,12 +184,13 @@ export const Select: React.FC<SelectProps> = (props) => {
         autoFocus,
         placeholder,
         label,
+        name,
         onChange,
     };
 
     return (
-        <SelectMenu {...rest}>
-            <SelectInner {...innerProps} />
+        <SelectMenu {...rest} sx={{ position: 'relative' }}>
+            <SelectInner {...innerProps} innerRef={ref} />
         </SelectMenu>
     );
-};
+});
