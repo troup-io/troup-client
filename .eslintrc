@@ -24,7 +24,6 @@
     "rules": {
         "no-unused-expressions": "off",
         "require-await": "error",
-        "complexity": ["warn", 10],
         "camelcase": "error",
         "default-case": "error",
         "eqeqeq": "error",
