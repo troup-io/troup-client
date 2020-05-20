@@ -18,8 +18,8 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "editor.tokenColorCustomizations": {
-        "semanticHighlighting": true
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true
     },
     "timeline.showView": true,
     "npm.autoDetect": "off",
@@ -33,7 +33,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/node_modules": true,
+        "**/node_modules": false,
         "**/.next": true,
         "**/yarn.lock": true
     },

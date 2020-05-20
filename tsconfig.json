@@ -1,29 +1,32 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "jsx": "preserve",
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true
-  },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "jsx": "preserve",
+        "skipLibCheck": true,
+        "strict": false,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "paths": {
+            "@images/*": ["public/images/*"],
+            "@components/*": ["components/*"],
+            "@atoms/*": ["styled/atoms/*"],
+            "@molecules/*": ["styled/molecules/*"],
+            "@styled/*": ["styled/*"],
+            "@services/*": ["services/*"],
+            "@with/*": ["with/*"],
+            "@hooks/*": ["hooks/*"],
+            "@utils": ["utils/index"],
+            "@utils/*": ["utils/*"]
+        }
+    },
+    "exclude": ["node_modules"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
