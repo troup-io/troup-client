@@ -1,15 +1,16 @@
 import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
+import { Flex, Grid, Avatar, Box } from '@primer/components';
 import { ThemeProvider } from 'styled-components';
-import Link from 'next/link';
-import { Flex, Grid, Avatar } from '@primer/components';
+
+import { Link } from '@atoms/Link';
+import { Logo } from '@atoms/Logo';
+
+import { Menu } from '@components/Menu';
 
 import { GlobalStyles } from '@styled/index';
 import { theme } from '@styled/theme';
-
-import Logo from '@images/logo-original.svg';
-import { Menu } from '@components/Menu';
 
 export default class Troup extends App {
     state = {
@@ -27,13 +28,14 @@ export default class Troup extends App {
                         href="https://fonts.googleapis.com/css?family=DM+Sans:400,700|Lato:400,700&display=swap"
                         rel="stylesheet"
                     />
+                    <link rel="shortcut icon" href="/favicon.ico" />
                 </Head>
                 <ThemeProvider theme={theme}>
                     <GlobalStyles />
-                    <Grid gridTemplateRows="75px auto" height="100%">
+                    <Grid gridTemplateRows="max-content auto" height="100%">
                         <Flex as="header" alignItems="center" justifyContent="space-between" p={2}>
                             <Link href="/">
-                                <img src={Logo} alt="troup-logo" width={125} />
+                                <Logo />
                             </Link>
                             {isLoggedIn && (
                                 <Avatar
@@ -44,9 +46,9 @@ export default class Troup extends App {
 
                             {!isLoggedIn && <Menu />}
                         </Flex>
-                        <div style={{ height: '100%', flexShrink: 1 }}>
+                        <Box sx={{ position: 'relative', top: 0, left: 0 }}>
                             <Component />
-                        </div>
+                        </Box>
                     </Grid>
                 </ThemeProvider>
             </>
