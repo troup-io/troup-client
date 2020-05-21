@@ -44,7 +44,6 @@ export const Input = styled(TextInput)<InputProps>`
         position: absolute;
         top: 12px;
         left: 1px;
-        /* height: 20px; */
         ${padding(0, 0, 0, 1.25)};
         font-size: 0.65em;
         font-weight: 900;

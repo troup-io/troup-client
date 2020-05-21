@@ -25,7 +25,7 @@
         "no-unused-expressions": "off",
         "require-await": "error",
         "camelcase": [
-            "error",
+            "off",
             {
                 "ignoreImports": true
             }
