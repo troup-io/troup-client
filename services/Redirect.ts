@@ -1,8 +1,9 @@
 import { ServerResponse } from 'http';
 import Router from 'next/router';
+import { formUrl } from '@utils';
 
-export const redirectToLogin = (server?: ServerResponse): void => {
-    const login = '/login?redirected=true';
+export const redirectToLogin = (server?: ServerResponse, teamName?: string | string[]): void => {
+    const login = formUrl('login', teamName, true);
 
     if (server) {
         server.writeHead(302, {
@@ -14,8 +15,11 @@ export const redirectToLogin = (server?: ServerResponse): void => {
     }
 };
 
-export const redirectToDashboard = (server?: ServerResponse): void => {
-    const dashboard = '/?redirected=true';
+export const redirectToDashboard = (
+    server?: ServerResponse,
+    teamName?: string | string[]
+): void => {
+    const dashboard = formUrl('dashboard', teamName, true);
 
     if (server) {
         server.writeHead(302, {

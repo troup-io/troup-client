@@ -2,6 +2,8 @@ import jwtDecode from 'jwt-decode';
 import Cookie from 'js-cookie';
 import Router from 'next/router';
 
+import { formUrl } from '@utils';
+
 export type DecodedToken = {
     readonly userId: string;
     readonly expiry: number;
@@ -38,6 +40,6 @@ export class AuthToken {
 
     static async storeToken(token: string): Promise<void> {
         Cookie.set('token', token, { expires: 7 });
-        await Router.push('/');
+        await Router.push(formUrl('dashboard', Router.query.name));
     }
 }

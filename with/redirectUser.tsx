@@ -14,7 +14,7 @@ export function withRedirectUser(WrappedComponent: any): React.ComponentType<Aut
             const initialProps = { auth };
 
             if (auth.isAuthenticated) {
-                redirectToDashboard(ctx.res);
+                redirectToDashboard(ctx.res, ctx.query.team);
             }
 
             if (WrappedComponent.getInitialProps) {
