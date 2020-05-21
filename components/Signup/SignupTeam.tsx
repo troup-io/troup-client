@@ -3,6 +3,8 @@ import { gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Flex, Text } from '@primer/components';
 
+import { SignupTeam as SignupTeamType } from '@server-types/SignupTeam';
+
 import { AuthToken } from '@services/Auth';
 
 import { useMutation } from '@hooks/useMutation';
@@ -48,16 +50,16 @@ const SIGNUP_TEAM = gql`
 `;
 
 export const SignupTeam: React.FC<{}> = () => {
-    const [signupTeam, { error, loading }] = useMutation(SIGNUP_TEAM, {
+    const [signupTeam, { error, loading }] = useMutation<SignupTeamType>(SIGNUP_TEAM, {
         errorPolicy: 'none',
     });
     const { handleSubmit, register } = useForm<FormData>();
 
     const submit = handleSubmit(async (variables) => {
-        const result = (await signupTeam({
+        const result = await signupTeam({
             variables,
-        })) as any;
-        await AuthToken.storeToken(result?.data?.signupTeam?.token);
+        });
+        await AuthToken.storeToken(result?.data?.signupTeam.token);
     });
 
     const rand = useRef(Math.floor(Math.random() * 100)).current;
@@ -73,7 +75,7 @@ export const SignupTeam: React.FC<{}> = () => {
                 block
                 defaultValue={`samrith_${rand}@me.com`}
                 ref={register({ required: true })}
-                autoFocus
+                tabIndex={0}
             />
             <Input
                 marginBottom={3}

@@ -3,6 +3,9 @@ import { gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Flex, Text } from '@primer/components';
 
+import { GetTeamByName_teamDetailsFromName } from '@server-types/GetTeamByName';
+import { SignupUser as SignupUserType } from '@server-types/SignupUser';
+
 import { AuthToken } from '@services/Auth';
 
 import { useMutation } from '@hooks/useMutation';
@@ -48,25 +51,21 @@ const SIGNUP_USER = gql`
 `;
 
 export const SignupUser: React.FC<{
-    team: {
-        id: string;
-        name: string;
-        displayName?: string;
-    };
+    team: GetTeamByName_teamDetailsFromName;
 }> = ({ team }) => {
-    const [signupUser, { error, loading }] = useMutation(SIGNUP_USER, {
+    const [signupUser, { error, loading }] = useMutation<SignupUserType>(SIGNUP_USER, {
         errorPolicy: 'none',
     });
     const { handleSubmit, register } = useForm<FormData>();
 
     const submit = handleSubmit(async (variables) => {
-        const result = (await signupUser({
+        const result = await signupUser({
             variables: {
                 ...variables,
                 teamId: team.id,
             },
-        })) as any;
-        await AuthToken.storeToken(result?.data?.signupUser?.token);
+        });
+        await AuthToken.storeToken(result.data?.signupUser.token);
     });
 
     const rand = useRef(Math.floor(Math.random() * 100)).current;
@@ -82,7 +81,7 @@ export const SignupUser: React.FC<{
                 block
                 defaultValue={`samrith_${rand}@me.com`}
                 ref={register({ required: true })}
-                autoFocus
+                tabIndex={0}
             />
             <Input
                 marginBottom={3}
