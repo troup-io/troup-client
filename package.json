@@ -9,7 +9,7 @@
         "dev": "next",
         "build": "next build",
         "start": "next start",
-        "codegen": "yarn apollo codegen:generate --target typescript --includes='{components,pages}/**/*.tsx' --tagName gql --globalTypesFile __generated__/global-types.ts --tsFileExtension d.ts --outputFlat server-types",
+        "codegen": "rimraf server-types && yarn apollo codegen:generate --target typescript --includes='{components,pages}/**/*.tsx' --tagName gql --globalTypesFile __generated__/global-types.ts --tsFileExtension d.ts --outputFlat server-types",
         "lint": "eslint components --ext .ts,.tsx,.json,.js"
     },
     "resolutions": {
@@ -54,6 +54,7 @@
         "eslint-plugin-react": "^7.19.0",
         "eslint-plugin-react-hooks": "^4.0.0",
         "prettier": "^2.0.5",
+        "rimraf": "^3.0.2",
         "typescript": "^3.8.3"
     }
 }
