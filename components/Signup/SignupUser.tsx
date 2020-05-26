@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { Flex, Text } from '@primer/components';
+import { Flash } from '@primer/components';
 
 import { GetTeamByName_teamDetailsFromName } from '@server-types/GetTeamByName';
 import { SignupUser as SignupUserType } from '@server-types/SignupUser';
@@ -59,13 +59,15 @@ export const SignupUser: React.FC<{
     const { handleSubmit, register } = useForm<FormData>();
 
     const submit = handleSubmit(async (variables) => {
-        const result = await signupUser({
-            variables: {
-                ...variables,
-                teamId: team.id,
-            },
-        });
-        await AuthToken.storeToken(result.data?.signupUser.token);
+        if (!loading) {
+            const result = await signupUser({
+                variables: {
+                    ...variables,
+                    teamId: team.id,
+                },
+            });
+            await AuthToken.storeToken(result.data?.signupUser.token);
+        }
     });
 
     const rand = useRef(Math.floor(Math.random() * 100)).current;
@@ -73,6 +75,11 @@ export const SignupUser: React.FC<{
     return (
         <form style={{ width: '100%' }} onSubmit={!loading ? submit : undefined}>
             {loading && <Loading size={50} />}
+            {error && (
+                <Flash variant="danger" mb={3}>
+                    {error.message}
+                </Flash>
+            )}
             <Input
                 marginBottom={3}
                 label="Email"
@@ -110,13 +117,9 @@ export const SignupUser: React.FC<{
                 defaultValue={`Shankar ${rand}`}
                 ref={register({ required: true })}
             />
-            <Flex alignItems="center" justifyContent="space-between">
-                <Text></Text>
-            </Flex>
             <ButtonPrimary type="submit" disabled={loading} fullWidth mb={4}>
                 {loading ? 'Loading..' : 'Submit'}
             </ButtonPrimary>
-            {error && error?.message}
         </form>
     );
 };

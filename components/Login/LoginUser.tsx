@@ -10,6 +10,7 @@ import { useMutation } from '@hooks/useMutation';
 
 import { ButtonPrimary } from '@atoms/Button';
 import { Input } from '@atoms/Input';
+import { AlertDanger } from '@atoms/Alert';
 
 const LOGIN_USER = gql`
     mutation SigninUser($email: String!, $password: String!) {
@@ -29,14 +30,17 @@ export const LoginUser: React.FC<{}> = () => {
     });
 
     const submit = handleSubmit(async (data) => {
-        const result = await loginUser({
-            variables: data,
-        });
-        await AuthToken.storeToken(result?.data?.signinUser.token);
+        if (!loading) {
+            const result = await loginUser({
+                variables: data,
+            });
+            await AuthToken.storeToken(result?.data?.signinUser.token);
+        }
     });
 
     return (
         <form style={{ width: '100%' }} onSubmit={!loading ? submit : undefined}>
+            {error && <AlertDanger mb={3}>{error.message}</AlertDanger>}
             <Input
                 mb={3}
                 label="Email"
@@ -57,7 +61,6 @@ export const LoginUser: React.FC<{}> = () => {
             <ButtonPrimary type="submit" disabled={loading} fullWidth mb={4}>
                 {loading ? 'Loading..' : 'Submit'}
             </ButtonPrimary>
-            {error && error?.message}
         </form>
     );
 };
