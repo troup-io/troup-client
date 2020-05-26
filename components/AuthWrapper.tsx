@@ -1,12 +1,13 @@
 import React from 'react';
-import { gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import DefaultError from 'next/error';
 import { Flex, Heading, Text } from '@primer/components';
 
 import { GetTeamByName_teamDetailsFromName } from '@server-types/GetTeamByName';
 
-import { useQuery } from '@hooks/useQuery';
+// import { useQuery } from '@hooks/useQuery';
 
 import { Link } from '@atoms/Link';
 
@@ -28,7 +29,7 @@ export const AuthWrapper: React.FC<{
     pageHeading: 'Login' | 'Signup';
     team: React.FunctionComponent<{ team: GetTeamByName_teamDetailsFromName }>;
     user: React.FunctionComponent;
-}> = ({ children, pageHeading, team: Team, user: User }) => {
+}> = ({ pageHeading, team: Team, user: User }) => {
     const {
         query: { team },
     } = useRouter();
@@ -44,7 +45,7 @@ export const AuthWrapper: React.FC<{
     }
 
     if (error) {
-        return <>{error.message}</>;
+        return <DefaultError statusCode={404} />;
     }
 
     return (
