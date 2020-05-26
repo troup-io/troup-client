@@ -1,3 +1,5 @@
+import { ApolloError } from '@apollo/client';
+
 export function popSingular<T>(data: T): T {
     if (data) {
         const dataValues = Object.values(data);
@@ -33,4 +35,11 @@ export function formUrl(
     }
 
     return [pathname, redirected ? '?redirected=true' : ''].join('');
+}
+
+export function errorParser(error: ApolloError): ApolloError {
+    if (error && error.message) {
+        error.message = error.message.replace(/^((graphql|network)\s*error\s*:\s*)/gi, '');
+    }
+    return error;
 }

@@ -7,7 +7,7 @@ import {
 } from '@apollo/client';
 import { DocumentNode } from 'graphql';
 
-import { popSingular } from '@utils';
+import { popSingular, errorParser } from '@utils';
 
 export function useMutation<TData = any, TVariables = OperationVariables>(
     query: DocumentNode,
@@ -15,7 +15,7 @@ export function useMutation<TData = any, TVariables = OperationVariables>(
 ): MutationTuple<TData, TVariables> {
     const [mutationHandler, { data, error, ...rest }] = _useMutation(query, options);
     const newData: TData = useMemo(() => popSingular(data), [data]);
-    const newError = useMemo(() => popSingular(error), [error]);
+    const newError = useMemo(() => errorParser(popSingular(error)), [error]);
 
     return [
         mutationHandler,

@@ -2,7 +2,7 @@ import jwtDecode from 'jwt-decode';
 import Cookie from 'js-cookie';
 import Router from 'next/router';
 
-import { formUrl } from '@utils';
+import { redirectToDashboard } from './Redirect';
 
 export type DecodedToken = {
     readonly userId: string;
@@ -40,6 +40,6 @@ export class AuthToken {
 
     static async storeToken(token: string): Promise<void> {
         Cookie.set('token', token, { expires: 7 });
-        await Router.push(formUrl('dashboard', Router.query.name));
+        await redirectToDashboard(null, Router.query.team);
     }
 }

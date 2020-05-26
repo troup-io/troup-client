@@ -7,7 +7,7 @@ import {
 } from '@apollo/client';
 import { DocumentNode } from 'graphql';
 
-import { popSingular } from '@utils';
+import { popSingular, errorParser } from '@utils';
 
 export function useQuery<TData = any, TVariables = OperationVariables>(
     query: DocumentNode,
@@ -15,8 +15,9 @@ export function useQuery<TData = any, TVariables = OperationVariables>(
 ): QueryResult<TData, TVariables> {
     const { data, error, ...rest } = _useQuery(query, options);
     const newData: TData = useMemo(() => popSingular(data), [data]);
-    const newError = useMemo(() => popSingular(error), [error]);
+    const newError = useMemo(() => errorParser(popSingular(error)), [error]);
 
+    console.log(data, error);
     return {
         data: newData,
         error: newError,
