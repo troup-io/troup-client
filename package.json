@@ -16,7 +16,7 @@
         "graphql": "14.x"
     },
     "dependencies": {
-        "@apollo/client": "^3.0.0-beta.44",
+        "@apollo/client": "^3.0.0-beta.50",
         "@primer/components": "^19.0.0",
         "isomorphic-unfetch": "^3.0.0",
         "js-cookie": "^2.2.1",
