@@ -1,14 +1,30 @@
+import { math } from 'polished';
+
+export const sizes = {
+    small: '544px',
+    medium: '768px',
+    large: '1012px',
+    xlarge: '1280px',
+};
+
 const variables = {
     margin: 10,
     padding: 10,
     borderRadius: 7,
     borderSize: 1,
+    breakPoints: {
+        xs: `@media (max-width: ${manip(sizes.small)})`,
+        sm: `@media (min-width: ${sizes.small}) and (max-width: ${manip(sizes.medium)})`,
+        md: `@media (min-width: ${sizes.medium}) and (max-width: ${manip(sizes.large)})`,
+        lg: `@media (min-width: ${sizes.large}) and (max-width: ${manip(sizes.xlarge)})`,
+        xl: `@media (min-width: ${sizes.xlarge})`,
+    },
 };
 
 export default variables;
 export type VariablesType = keyof typeof variables;
 
-export const breakpoints = ['544px', '768px', '1012px', '1280px'];
+export const breakpoints = [sizes.small, sizes.medium, sizes.large, sizes.xlarge];
 
 export const borderWidths = [0, '1px'];
 
@@ -42,13 +58,6 @@ export const fontWeights = {
     bold: 600,
 };
 
-export const sizes = {
-    small: '544px',
-    medium: '768px',
-    large: '1012px',
-    xlarge: '1280px',
-};
-
 export const fontSizes = ['12px', '14px', '16px', '20px', '24px', '32px', '40px', '48px'];
 
 export const space = [
@@ -69,4 +78,8 @@ export const space = [
 
 function fontStack(fonts): string[] {
     return fonts.map((font: string) => (font.includes(' ') ? `"${font}"` : font)).join(', ');
+}
+
+function manip(value: string, add = false): string {
+    return math(`${value} ${add ? '+' : '-'} 1`);
 }
