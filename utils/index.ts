@@ -40,6 +40,10 @@ export function formUrl(
 export function errorParser(error: ApolloError): ApolloError {
     if (error && error.message) {
         error.message = error.message.replace(/^((graphql|network)\s*error\s*:\s*)/gi, '');
+
+        if (error.message.includes('status code 400')) {
+            error.message = 'Internal server error.';
+        }
     }
     return error;
 }
