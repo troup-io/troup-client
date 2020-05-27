@@ -1,7 +1,6 @@
 import React from 'react';
 import { gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { Flash } from '@primer/components';
 
 import { GetTeamByName_teamDetailsFromName } from '@server-types/GetTeamByName';
 import { SigninTeam } from '@server-types/SigninTeam';

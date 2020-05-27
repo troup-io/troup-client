@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import { Flash } from '@primer/components';
 
 import { SignupTeam as SignupTeamType } from '@server-types/SignupTeam';
 
@@ -11,6 +10,7 @@ import { useMutation } from '@hooks/useMutation';
 
 import { ButtonPrimary } from '@atoms/Button';
 import { Input } from '@atoms/Input';
+import { AlertDanger } from '@atoms/Alert';
 
 import { Loading } from '@molecules/Loading';
 
@@ -69,11 +69,7 @@ export const SignupTeam: React.FC<{}> = () => {
     return (
         <form style={{ width: '100%' }} onSubmit={!loading ? submit : undefined}>
             {loading && <Loading size={50} />}
-            {error && (
-                <Flash variant="danger" mb={3}>
-                    {error.message}
-                </Flash>
-            )}
+            {error && <AlertDanger mb={3}>{error.message}</AlertDanger>}
             <Input
                 marginBottom={3}
                 label="Email"
