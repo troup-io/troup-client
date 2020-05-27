@@ -64,7 +64,7 @@ export const Input = styled(TextInput)<InputProps>`
 
     &:focus-within {
         border-color: ${rgba('primaryDark', 0.5)};
-        ${boxShadow()};
+        ${boxShadow(0.3, 'primaryDark')};
     }
 
     ${(props): any => props.isVerified && verifiedStyled('success')}
