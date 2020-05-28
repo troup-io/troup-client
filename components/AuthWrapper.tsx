@@ -1,9 +1,10 @@
 import React from 'react';
-import { gql } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import DefaultError from 'next/error';
-import { Flex, Heading, Text } from '@primer/components';
+import { Flex, Heading } from '@primer/components';
+
+import { GET_TEAM_BY_NAME } from '@queries';
 
 import { GetTeamByName_teamDetailsFromName } from '@server-types/GetTeamByName';
 
@@ -13,22 +14,12 @@ import { Link } from '@atoms/Link';
 
 import { Loading } from '@molecules/Loading';
 
-const GET_TEAM_BY_NAME = gql`
-    query GetTeamByName($name: String!) {
-        teamDetailsFromName(name: $name) {
-            id
-            name
-            displayName
-        }
-    }
-`;
-
 // TODO-ss: Handle errors gracefully for form errors.
 
 export const AuthWrapper: React.FC<{
     pageHeading: 'Login' | 'Signup';
-    team: React.FunctionComponent<{ team: GetTeamByName_teamDetailsFromName }>;
-    user: React.FunctionComponent;
+    team: React.FunctionComponent<{ team?: GetTeamByName_teamDetailsFromName }>;
+    user: React.FunctionComponent<{ team?: GetTeamByName_teamDetailsFromName }>;
 }> = ({ pageHeading, team: Team, user: User }) => {
     const {
         query: { team },
@@ -39,6 +30,7 @@ export const AuthWrapper: React.FC<{
         },
         skip: !team,
     });
+    const isLogin = pageHeading === 'Login';
 
     if (loading) {
         return <Loading opacify />;
@@ -47,6 +39,14 @@ export const AuthWrapper: React.FC<{
     if (error) {
         return <DefaultError statusCode={404} />;
     }
+
+    const getComponent = () => {
+        if (isLogin) {
+            return team ? <Team team={data} /> : <User />;
+        }
+
+        return team ? <User team={data} /> : <Team />;
+    };
 
     return (
         <Flex
@@ -73,18 +73,20 @@ export const AuthWrapper: React.FC<{
             <Heading fontSize={5} mb={4}>
                 {data ? `${pageHeading} to ${data?.displayName ?? data?.name}` : pageHeading}
             </Heading>
-            {team ? <User /> : <Team team={data} />}
-            {pageHeading === 'Signup' && (
-                <Text>
+
+            {getComponent()}
+
+            {!isLogin && (
+                <Flex justifyContent="center">
                     Already a user? <Link href={team ? `/${team}/login` : '/login'}>Login now</Link>
                     .
-                </Text>
+                </Flex>
             )}
-            {pageHeading === 'Login' && (
-                <Text>
+            {isLogin && (
+                <Flex justifyContent="center">
                     Not a user?{' '}
                     <Link href={team ? `/${team}/signup` : '/signup'}>Register now</Link>.
-                </Text>
+                </Flex>
             )}
         </Flex>
     );
