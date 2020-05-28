@@ -12,11 +12,13 @@ export default function createApolloClient(initialState, ctx): ApolloClient<Norm
         ssrMode: Boolean(ctx),
         link: concat(
             new ApolloLink((operation, forward) => {
-                operation.setContext({
-                    headers: {
-                        authorization: token ? `Bearer ${token.replace(/"/g, '')}` : null,
-                    },
-                });
+                if (token) {
+                    operation.setContext({
+                        headers: {
+                            authorization: `Bearer ${token.replace(/"/g, '')}`,
+                        },
+                    });
+                }
 
                 return forward(operation);
             }),
