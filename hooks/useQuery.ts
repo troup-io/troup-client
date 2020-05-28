@@ -13,11 +13,13 @@ export function useQuery<TData = any, TVariables = OperationVariables>(
     query: DocumentNode,
     options?: QueryHookOptions<TData, TVariables>
 ): QueryResult<TData, TVariables> {
-    const { data, error, ...rest } = _useQuery(query, options);
+    const { data, error, ...rest } = _useQuery(query, {
+        ...options,
+        errorPolicy: 'all',
+    });
     const newData: TData = useMemo(() => popSingular(data), [data]);
     const newError = useMemo(() => errorParser(popSingular(error)), [error]);
 
-    console.log(data, error);
     return {
         data: newData,
         error: newError,
