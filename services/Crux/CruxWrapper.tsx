@@ -1,15 +1,17 @@
 import React from 'react';
-import { Flex, Grid, Avatar, Box } from '@primer/components';
+import { Flex, Grid, Box } from '@primer/components';
 
 import { Link } from '@atoms/Link';
 import { Logo } from '@atoms/Logo';
+import { Avatar } from '@atoms/Avatar';
+import { Dropdown, DropdownMenu, DropdownItem } from '@atoms/Dropdown';
 
 import { Loading } from '@molecules/Loading';
 
 import { Menu } from '@components/Menu';
 import { DefaultError } from '@components/DefaultError';
 
-import { getTokenFromCookie } from '@utils';
+import { getTokenFromCookie, logout } from '@utils';
 
 export const CruxWrapper: React.FC<{ userError: any; teamError: any; loading: boolean }> = ({
     loading,
@@ -42,7 +44,15 @@ export const CruxWrapper: React.FC<{ userError: any; teamError: any; loading: bo
                     <Logo />
                 </Link>
                 {isLoggedIn && (
-                    <Avatar src="https://avatars.githubusercontent.com/primer" size={45} />
+                    <Dropdown>
+                        <summary>
+                            <Avatar src="https://avatars.githubusercontent.com/primer" size={45} />
+                        </summary>
+                        <DropdownMenu>
+                            <DropdownItem onClick={logout}>Logout</DropdownItem>
+                            <DropdownItem>Settings</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 )}
 
                 {!isLoggedIn && <Menu />}
