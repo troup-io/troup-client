@@ -57,12 +57,17 @@ export const padding = (top = 1, right = undefined, bottom = undefined, left = u
         padding * (left ?? right ?? top)
     );
 
-export const margin = (top = 0, right = 0, bottom = undefined, left = undefined) => ({
+export const margin = (top = 0, right = undefined, bottom = undefined, left = undefined) => ({
     theme: {
         variables: { margin },
     },
 }: Props): any =>
-    _margin(margin * top, margin * right, margin * (bottom ?? top), margin * (left ?? left));
+    _margin(
+        margin * top,
+        margin * (right ?? top),
+        margin * (bottom ?? top),
+        margin * (left ?? right ?? top)
+    );
 
 export const darken = (key: ColorsType, value: number) => (props: Props): any =>
     _darken(value, props.theme.brand[key]);
