@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import DefaultError from 'next/error';
 
 import { GET_USER_DETAILS, GET_TEAM_BY_NAME } from '@queries';
 
@@ -8,9 +7,10 @@ import { CruxContext, CruxContextType } from '@services/CruxContext';
 
 import { useQuery } from '@hooks/useQuery';
 
-import { Loading } from '@molecules/Loading';
+import { withApollo } from '@with/apollo';
+import { CruxWrapper } from './CruxWrapper';
 
-export const Crux: React.FC = ({ children }) => {
+const CruxInner: React.FC = ({ children }) => {
     const {
         query: { team: name },
     } = useRouter();
@@ -30,13 +30,17 @@ export const Crux: React.FC = ({ children }) => {
         [user, team]
     );
 
-    if (userLoading || teamLoading) {
-        return <Loading opacify />;
-    }
-
-    if (userError || teamError) {
-        return <DefaultError statusCode={500} />;
-    }
-
-    return <CruxContext.Provider value={cruxData}>{children}</CruxContext.Provider>;
+    return (
+        <CruxContext.Provider value={cruxData}>
+            <CruxWrapper
+                userError={userError}
+                teamError={teamError}
+                loading={userLoading || teamLoading}
+            >
+                {children}
+            </CruxWrapper>
+        </CruxContext.Provider>
+    );
 };
+
+export const Crux = withApollo({ ssr: false })(CruxInner);

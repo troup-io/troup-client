@@ -1,10 +1,11 @@
 import { createContext } from 'react';
 
 import { GetTeamByName_teamDetailsFromName } from '@server-types/GetTeamByName';
+import { GetUserDetails_userDetails } from '@server-types/GetUserDetails';
 
 export type CruxContextType = {
-    user?: any;
-    team?: Omit<GetTeamByName_teamDetailsFromName, '__typename'>;
+    user?: GetUserDetails_userDetails;
+    team?: GetTeamByName_teamDetailsFromName;
 };
 
 export const CruxContext = createContext<CruxContextType>({
