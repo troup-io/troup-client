@@ -13,7 +13,7 @@ export function withRedirectUser(WrappedComponent: any): React.ComponentType<Aut
             const auth = new AuthToken(token);
             const initialProps = { auth };
 
-            if (auth.isAuthenticated) {
+            if (auth.isAuthenticated && /signup|login/i.test(ctx.pathname)) {
                 redirectToDashboard(ctx.res, ctx.query.team);
             }
 
