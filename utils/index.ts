@@ -1,4 +1,13 @@
 import { ApolloError } from '@apollo/client';
+import Cookies from 'js-cookie';
+import { Cookie as NextCookies } from 'next-cookie';
+
+import { AuthToken } from '@services/Auth';
+import { NextPageContext } from 'next';
+
+export async function logout(): Promise<void> {
+    await AuthToken.removeToken();
+}
 
 export function popSingular<T>(data: T): T {
     if (data) {
@@ -46,4 +55,8 @@ export function errorParser(error: ApolloError): ApolloError {
         }
     }
     return error;
+}
+
+export function getTokenFromCookie(ctx?: NextPageContext): string {
+    return typeof window !== 'undefined' ? Cookies.get('token') : new NextCookies(ctx).get('token');
 }
