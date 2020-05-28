@@ -8,18 +8,23 @@ import { CruxContext, CruxContextType } from '@services/CruxContext';
 import { useQuery } from '@hooks/useQuery';
 
 import { withApollo } from '@with/apollo';
+
+import { getTokenFromCookie } from '@utils';
 import { CruxWrapper } from './CruxWrapper';
 
 const CruxInner: React.FC = ({ children }) => {
+    const hasToken = !!getTokenFromCookie();
     const {
         query: { team: name },
     } = useRouter();
-    const { data: user, error: userError, loading: userLoading } = useQuery(GET_USER_DETAILS);
+    const { data: user, error: userError, loading: userLoading } = useQuery(GET_USER_DETAILS, {
+        skip: !hasToken,
+    });
     const { data: team, error: teamError, loading: teamLoading } = useQuery(GET_TEAM_BY_NAME, {
         variables: {
             name,
         },
-        skip: !name,
+        skip: !name || !hasToken,
     });
 
     const cruxData = useMemo<CruxContextType>(
