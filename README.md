@@ -2,11 +2,13 @@
 
 # Troup Client
 
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/troup) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) [![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat)](https://www.firsttimersonly.com/)
+
 > ### 📢 We are looking for contributors!
 >
 > This project is under heavy development and is on the lookout for contributors both technical and ono-technical. If you are interested in understanding the product and contributing, do get in touch at hello@troupapp.com.
 
-The Troup client is the frontend app that helps the user address problems that we aim to solve. The client is built on a ton of wonderful open-source projects with the goal of providing a fluid experience to the user.
+The Troup client is the frontend app that helps the user address problems that we aim to solve. The client is built atop wonderful open-source projects with the goal of providing a fluid experience to the user.
 
 **Languages:**
 
