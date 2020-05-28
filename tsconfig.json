@@ -25,7 +25,9 @@
             "@hooks/*": ["hooks/*"],
             "@utils": ["utils/index"],
             "@utils/*": ["utils/*"],
-            "@server-types/*": ["server-types/*"]
+            "@server-types/*": ["server-types/*"],
+            "@queries": ["data/queries"],
+            "@mutations": ["data/mutations"]
         }
     },
     "exclude": ["node_modules", "__generated__/global-types.ts"],
