@@ -1,3 +1,12 @@
+import { useCrux } from '@hooks/useCrux';
+
 export const DashboardTeam: React.FC = () => {
-    return <div>This is the homepage accessible only after login to a particular team!</div>;
+    const { user, team } = useCrux();
+
+    return (
+        <div>
+            Hello, {user?.profile?.firstName} {user?.profile?.lastName} and welcome to{' '}
+            {team?.displayName || team?.name}!
+        </div>
+    );
 };
