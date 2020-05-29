@@ -27,7 +27,8 @@
             "@utils/*": ["utils/*"],
             "@server-types/*": ["server-types/*"],
             "@queries": ["data/queries"],
-            "@mutations": ["data/mutations"]
+            "@mutations": ["data/mutations"],
+            "@fragments": ["data/fragments"]
         }
     },
     "exclude": ["node_modules", "__generated__/global-types.ts"],
