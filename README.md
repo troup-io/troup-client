@@ -27,6 +27,14 @@ The Troup client is the frontend app that helps the user address problems that w
 -   [Styled Components][styled-components]
 -   [Primer Components][primer-components]
 
+## `.env` Setup
+
+You will need to add a `.env` file into the project to get it up and running. This `.env` file should be created on the root of the project and contains the following information:
+
+```
+NEXT_PUBLIC_ENDPOINT=http://localhost:4000/graphql
+```
+
 ## Available scripts
 
 ### `yarn dev`
