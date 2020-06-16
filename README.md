@@ -27,13 +27,11 @@ The Troup client is the frontend app that helps the user address problems that w
 -   [Styled Components][styled-components]
 -   [Primer Components][primer-components]
 
-## `.env` Setup
+## Setting up environment variables
 
-You will need to add a `.env` file into the project to get it up and running. This `.env` file should be created on the root of the project and contains the following information:
+You will need to create a `.env` file in the root folder. The instructions on setting those up are available within this example:
 
-```
-NEXT_PUBLIC_ENDPOINT=http://localhost:4000/graphql
-```
+-   [Root environment variables](https://github.com/troup-io/troup-client/blob/master/example.env)
 
 ## Available scripts
 
