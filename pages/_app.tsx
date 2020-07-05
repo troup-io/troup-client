@@ -1,33 +1,36 @@
 import React from 'react';
-import App from 'next/app';
 import Head from 'next/head';
+import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from 'styled-components';
 
 import { Crux } from '@services/Crux';
 
+import { useApollo } from '@with/apollo';
+
 import { GlobalStyles } from '@styled/index';
 import { theme } from '@styled/theme';
 
-export default class Troup extends App {
-    render(): JSX.Element {
-        const { Component } = this.props;
+export default function App({ Component, pageProps }): JSX.Element {
+    const {
+        auth: { token },
+    } = pageProps;
+    const apolloClient = useApollo(pageProps.initialApolloState, token);
 
-        return (
-            <>
-                <Head>
-                    <link
-                        href="https://fonts.googleapis.com/css?family=DM+Sans:400,700|Lato:400,700&display=swap"
-                        rel="stylesheet"
-                    />
-                    <link rel="shortcut icon" href="/favicon.ico" />
-                </Head>
-                <ThemeProvider theme={theme}>
-                    <GlobalStyles />
-                    <Crux>
-                        <Component />
-                    </Crux>
-                </ThemeProvider>
-            </>
-        );
-    }
+    return (
+        <ApolloProvider client={apolloClient}>
+            <Head>
+                <link
+                    href="https://fonts.googleapis.com/css?family=DM+Sans:400,700|Lato:400,700&display=swap"
+                    rel="stylesheet"
+                />
+                <link rel="shortcut icon" href="/favicon.ico" />
+            </Head>
+            <ThemeProvider theme={theme}>
+                <GlobalStyles />
+                <Crux>
+                    <Component />
+                </Crux>
+            </ThemeProvider>
+        </ApolloProvider>
+    );
 }
