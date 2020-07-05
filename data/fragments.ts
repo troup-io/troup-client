@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const FragmentUserTeamDetails = gql`
-    fragment FragmentUserTeamDetails on User {
+    fragment FragmentUserTeamDetails on UserTeamDetails {
         ownerTeams {
             id
             name
