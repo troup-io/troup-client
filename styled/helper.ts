@@ -87,3 +87,7 @@ export const rgba = (key: ColorsType, value: number) => (props: Props): any =>
 export const boxShadow = (value?: number, color?: ColorsType) => (props: Props): any => css`
     box-shadow: 0 2px 5px 1px ${rgba(color ?? 'defaultBorder', value ?? 0.2)};
 `;
+
+export const transition = (property: string) => (): any => css`
+    transition: ${property} 0.25s linear;
+`;

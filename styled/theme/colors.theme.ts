@@ -1,4 +1,4 @@
-import { rgba, desaturate } from 'polished';
+import { rgba, desaturate, darken } from 'polished';
 
 // Base schemes
 const white = '#FFF';
@@ -13,6 +13,8 @@ const secondary = '#45415E';
 const light = '#FFFFF4';
 
 // Dark schemes
+// const darkest = '#121212';
+const darkest = '#121212';
 const darker = '#323339';
 const dark = '#4F4F4F';
 const darkDim = '#828282';
@@ -63,6 +65,7 @@ export const defaultColors = {
     defaultBorder,
     disabledText,
     disabledBg,
+    base: darkest,
 };
 
 export type ColorsType = keyof typeof defaultColors;

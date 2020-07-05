@@ -9,9 +9,9 @@ export const GlobalStyles = createGlobalStyle`
     html, body {
         width: 100%;
         height: 100%;
-        color: ${color('dark')};
+        color: ${color('light')};
         font-family: 'Lato', sans-serif;
-        background: ${color('light')};
+        background: ${color('base')};
     }
 
     #__next {
