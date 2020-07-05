@@ -6,9 +6,11 @@ import { GetUserDetails_userDetails } from '@server-types/GetUserDetails';
 export type CruxContextType = {
     user?: GetUserDetails_userDetails;
     team?: GetTeamByName_teamDetailsFromName;
+    token?: string;
 };
 
 export const CruxContext = createContext<CruxContextType>({
     user: null,
     team: null,
+    token: null,
 });

@@ -1,17 +1,23 @@
 import React from 'react';
-import { Flex, Grid, Box } from '@primer/components';
-
-import { Link } from '@atoms/Link';
-import { Logo } from '@atoms/Logo';
-import { Avatar } from '@atoms/Avatar';
-import { Dropdown, DropdownMenu, DropdownItem } from '@atoms/Dropdown';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import { Grid, Box } from '@primer/components';
 
 import { Loading } from '@molecules/Loading';
 
-import { Menu } from '@components/Menu';
 import { DefaultError } from '@components/DefaultError';
+import Sidebar from '@components/Sidebar';
 
-import { getTokenFromCookie, logout } from '@utils';
+import { padding } from '@styled/helper';
+
+const ComponentWrapper = styled(Box)`
+    flex-shrink: 1;
+    width: 100%;
+    height: 100%;
+    ${padding(1)};
+    overflow-x: hidden;
+    overflow-y: auto;
+`;
 
 export const CruxWrapper: React.FC<{ userError: any; teamError: any; loading: boolean }> = ({
     loading,
@@ -19,11 +25,12 @@ export const CruxWrapper: React.FC<{ userError: any; teamError: any; loading: bo
     teamError,
     children,
 }) => {
-    const isLoggedIn = getTokenFromCookie();
+    const { pathname } = useRouter();
+    const isInnerRoute = pathname !== '/login' && pathname !== '/signup' && pathname !== '/';
 
     const renderComponent = (): React.ReactNode => {
         if (loading) {
-            return <Loading opacify />;
+            return <Loading opacify fixed />;
         }
 
         if (userError) {
@@ -38,28 +45,9 @@ export const CruxWrapper: React.FC<{ userError: any; teamError: any; loading: bo
     };
 
     return (
-        <Grid gridTemplateRows="max-content auto" height="100%">
-            <Flex as="header" alignItems="center" justifyContent="space-between" p={2}>
-                <Link href="/">
-                    <Logo />
-                </Link>
-                {isLoggedIn && (
-                    <Dropdown>
-                        <summary>
-                            <Avatar src="https://avatars.githubusercontent.com/primer" size={45} />
-                        </summary>
-                        <DropdownMenu>
-                            <DropdownItem onClick={logout}>Logout</DropdownItem>
-                            <DropdownItem>Settings</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                )}
-
-                {!isLoggedIn && <Menu />}
-            </Flex>
-            <Box sx={{ position: 'relative', top: 0, left: 0 }} height="100%" flexShrink={1}>
-                {renderComponent()}
-            </Box>
+        <Grid gridTemplateColumns={isInnerRoute ? 'max-content auto' : 'auto'} height="100%">
+            {isInnerRoute && <Sidebar />}
+            <ComponentWrapper>{renderComponent()}</ComponentWrapper>
         </Grid>
     );
 };

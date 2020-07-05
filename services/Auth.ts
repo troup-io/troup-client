@@ -1,6 +1,5 @@
 import jwtDecode from 'jwt-decode';
 import Cookie from 'js-cookie';
-import Router from 'next/router';
 
 import { redirectToDashboard, redirectToLogin } from './Redirect';
 
@@ -39,12 +38,12 @@ export class AuthToken {
     }
 
     static async storeToken(token: string): Promise<void> {
-        Cookie.set('token', token, { expires: 7, sameSite: 'strict' });
-        await redirectToDashboard(null, Router.query.team);
+        await Cookie.set('token', token, { expires: 7, sameSite: 'strict' });
+        await redirectToDashboard(null);
     }
 
     static async removeToken(): Promise<void> {
-        Cookie.remove('token');
-        await redirectToLogin(null, Router.query.team);
+        await Cookie.remove('token');
+        await redirectToLogin(null);
     }
 }
