@@ -23,22 +23,18 @@ export function popSingular<T>(data: T): T {
     return data;
 }
 
-export function formUrl(
-    path: 'login' | 'dashboard',
-    teamName?: string | string[],
-    redirected?: boolean
-): string {
+export function formUrl(path: 'login' | 'dashboard', redirected?: boolean): string {
     let pathname = null;
 
     switch (path) {
         case 'login': {
-            pathname = teamName ? `/${teamName}/login` : '/login';
+            pathname = '/login';
             break;
         }
 
         case 'dashboard':
         default: {
-            pathname = teamName ? `/${teamName}` : '/';
+            pathname = '/';
             break;
         }
     }
@@ -59,4 +55,20 @@ export function errorParser(error: ApolloError): ApolloError {
 
 export function getTokenFromCookie(ctx?: NextPageContext): string {
     return typeof window !== 'undefined' ? Cookies.get('token') : new NextCookies(ctx).get('token');
+}
+
+export function extractSize(size: string): [number, string] {
+    const unit = size.match(/\D+$/).pop();
+    const value = parseFloat(size.split(/\D+$/)[0]);
+    return [value, unit];
+}
+
+export function embedToken(token): any {
+    return {
+        context: {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        },
+    };
 }
