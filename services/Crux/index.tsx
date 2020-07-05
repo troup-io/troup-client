@@ -7,8 +7,6 @@ import { CruxContext, CruxContextType } from '@services/CruxContext';
 
 import { useQuery } from '@hooks/useQuery';
 
-import { withApollo } from '@with/apollo';
-
 import { getTokenFromCookie } from '@utils';
 import { CruxWrapper } from './CruxWrapper';
 
@@ -48,4 +46,4 @@ const CruxInner: React.FC = ({ children }) => {
     );
 };
 
-export const Crux = withApollo({ ssr: false })(CruxInner);
+export const Crux = CruxInner;
