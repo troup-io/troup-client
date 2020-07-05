@@ -16,6 +16,7 @@
         "isolatedModules": true,
         "paths": {
             "@images/*": ["public/images/*"],
+            "@logo": ["components/Logo"],
             "@components/*": ["components/*"],
             "@atoms/*": ["system/atoms/*"],
             "@molecules/*": ["system/molecules/*"],
@@ -28,7 +29,8 @@
             "@server-types/*": ["server-types/*"],
             "@queries": ["data/queries"],
             "@mutations": ["data/mutations"],
-            "@fragments": ["data/fragments"]
+            "@fragments": ["data/fragments"],
+            "@icons": ["node_modules/@styled-icons/evaicons-outline"]
         }
     },
     "exclude": ["node_modules", "__generated__/global-types.ts"],
