@@ -1,38 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NextPageContext } from 'next';
-import { Cookie as NextCookie } from 'next-cookie';
-import Cookie from 'js-cookie';
 
-import { AuthToken, AuthProps } from '../interfaces/auth.interfaces';
-import { redirectToDashboard } from '../services/Redirect';
+import { AuthToken } from '@services/Auth';
+import { redirectToDashboard } from '@services/Redirect';
 
-export function withRedirectUser(WrappedComponent: any): React.ComponentType<AuthProps> {
-    class RedirectUser extends Component<AuthProps> {
-        static getInitialProps(ctx: NextPageContext): AuthProps {
-            const token = new NextCookie(ctx).get('token') as string;
-            const auth = new AuthToken(token);
-            const initialProps = { auth };
+import { getTokenFromCookie } from '@utils';
 
-            if (auth.isAuthenticated && /signup|login/i.test(ctx.pathname)) {
-                redirectToDashboard(ctx.res, ctx.query.team);
-            }
+export function withRedirectUser(Component): any {
+    const hocComponent = (props) => <Component {...props} />;
 
-            if (WrappedComponent.getInitialProps) {
-                return WrappedComponent.getInitialProps(initialProps);
-            }
+    hocComponent.getInitialProps = async (ctx: NextPageContext): Promise<any> => {
+        const token = getTokenFromCookie(ctx);
+        const auth = new AuthToken(token);
+        const initialProps = { auth };
 
-            return initialProps;
+        if (auth.isAuthenticated && /signup|login/i.test(ctx.pathname)) {
+            redirectToDashboard(ctx.res);
         }
 
-        get auth(): AuthToken | null {
-            const token = this.props.auth?.token || Cookie.get('token');
-            return new AuthToken(token);
+        if (Component.getInitialProps) {
+            const innerProps = await Component.getInitialProps(initialProps);
+            return { ...innerProps, ...initialProps };
         }
 
-        render(): JSX.Element {
-            return <WrappedComponent auth={this.auth} {...this.props} />;
-        }
-    }
+        return initialProps;
+    };
 
-    return RedirectUser;
+    return hocComponent;
 }
