@@ -27,6 +27,12 @@ The Troup client is the frontend app that helps the user address problems that w
 -   [Styled Components][styled-components]
 -   [Primer Components][primer-components]
 
+## Setting up environment variables
+
+You will need to create a `.env` file in the root folder. The instructions on setting those up are available within this example:
+
+-   [Root environment variables](https://github.com/troup-io/troup-client/blob/master/example.env)
+
 ## Available scripts
 
 ### `yarn dev`
