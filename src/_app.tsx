@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }): JSX.Element {
             </Head>
             <ThemeProvider theme={theme}>
                 <GlobalStyles />
-                <Crux>
+                <Crux token={token}>
                     <Component />
                 </Crux>
             </ThemeProvider>

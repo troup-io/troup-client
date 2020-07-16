@@ -30,7 +30,7 @@ function createApolloClient(token?: string): ApolloClient<any> {
 }
 
 export function initializeApollo(initialState = null, token?: string): ApolloClient<any> {
-    const _apolloClient = apolloClient ?? createApolloClient(token);
+    const _apolloClient = createApolloClient(token);
 
     // If your page has Next.js data fetching methods that use Apollo Client, the initial state
     // gets hydrated here

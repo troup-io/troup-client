@@ -22,3 +22,13 @@ export const GET_USER_DETAILS = gql`
         }
     }
 `;
+
+export const GET_PROJECTS = gql`
+    query GetProjects {
+        projects {
+            id
+            name
+            sequence
+        }
+    }
+`;

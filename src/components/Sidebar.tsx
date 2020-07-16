@@ -14,7 +14,7 @@ import { Spacer } from '@atoms/Spacer';
 
 import { logout } from '@utils';
 
-import { padding, color, transition } from '@styled/helper';
+import { padding, color, transition, lighten, margin, borderRadius } from '@styled/helper';
 
 import {
     FolderOutline,
@@ -30,8 +30,10 @@ const SidebarWrapper = styled(Flex)`
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    ${padding(1)};
-    background: ${color('black')};
+    ${padding(1, 0)};
+    background: ${color('baseLight')};
+    border-right: 2px solid ${color('base')};
+    overflow-y: auto;
 `;
 
 const SidebarSection = styled(Spacer)`
@@ -40,9 +42,25 @@ const SidebarSection = styled(Spacer)`
     color: ${color('darkDim')};
     text-align: center;
     justify-items: center;
+
+    > a {
+        display: flex;
+        width: 100%;
+        ${padding(0, 1)};
+    }
 `;
 
 const SidebarLink = styled.span<{ selected?: boolean }>`
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    height: 35px;
+    ${margin(0, -1)};
+    ${padding(0, 1)};
+    line-height: normal;
     ${transition('all')};
     cursor: pointer;
 
@@ -53,9 +71,21 @@ const SidebarLink = styled.span<{ selected?: boolean }>`
     svg {
         color: ${(props) => (props.selected ? color('primaryDark') : color('darkDim'))};
     }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        width: 5px;
+        background: ${(props) => (props.selected ? color('primaryDark') : 'transparent')};
+        ${borderRadius(0, 1, 1, 0)};
+    }
 `;
 
-export default function Sidebar() {
+export default function Sidebar(): JSX.Element {
     const router = useRouter();
     const { user, team } = useCrux();
 

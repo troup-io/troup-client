@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Dropdown as _Dropdown } from '@primer/components';
 
-import { color, boxShadow, margin, padding, borderRadius, darken } from '@styled/helper';
+import { color, margin, padding, borderRadius, darken } from '@styled/helper';
 
 export const Dropdown = styled<typeof _Dropdown>(_Dropdown)`
     > summary {
@@ -17,9 +17,13 @@ Dropdown.defaultProps = {
 export const DropdownMenu = styled(_Dropdown.Menu)`
     ${margin(1, 0, 1)};
     padding: 0 !important;
-    background: ${color('light')};
+    background: ${color('darker')};
     ${borderRadius(1)};
-    ${boxShadow()};
+    box-shadow: none;
+
+    &:after {
+        border-top-color: ${color('darker')};
+    }
 `;
 
 export const DropdownItem = styled(_Dropdown.Item)`
@@ -28,14 +32,14 @@ export const DropdownItem = styled(_Dropdown.Item)`
     justify-content: flex-start;
     ${margin(1)};
     ${padding(0.75, 1)};
-    ${borderRadius(1)};
+    color: ${color('light')};
     white-space: initial;
+    ${borderRadius(1)};
     cursor: pointer;
     transition: all 0.15s ease;
 
     &:hover,
     &:focus {
-        color: ${color('light')};
         background: linear-gradient(
             to right,
             ${color('primaryDark')},

@@ -11,6 +11,7 @@ export type ButtonProps = PrimerButtonprops & {
 
 const commons = css<ButtonProps>`
     ${(props) => props.fullWidth && 'width: 100%'};
+    border: none;
     box-shadow: none;
     transition: all 0.25s ease;
 

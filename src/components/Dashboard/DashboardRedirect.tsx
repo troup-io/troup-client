@@ -3,6 +3,8 @@ import { gql } from '@apollo/client';
 import Router from 'next/router';
 import styled from 'styled-components';
 
+import { GET_PROJECTS } from '@queries';
+
 import { useQuery } from '@hooks/useQuery';
 
 import { Loading } from '@molecules/Loading';
@@ -25,16 +27,22 @@ const DashboardWrapper = styled.div`
 `;
 
 export const DashboardRedirect: React.FC = () => {
-    const { data, error, loading } = useQuery(GET_ALL_TEAMS);
+    const { data: teamData, error: teamError, loading: teamLoading } = useQuery(GET_ALL_TEAMS);
+    const { data: projectData, error: projectError, loading: projectLoading } = useQuery(
+        GET_PROJECTS
+    );
+
+    const loading = teamLoading || projectLoading;
+    const error = teamError || projectError;
 
     useEffect(() => {
-        if (data) {
-            Router.push(`/${data[0].name}/projects`);
+        if (teamData && projectData) {
+            Router.push(`/${teamData[0].name}/projects/${projectData[0].sequence}`);
         }
-    }, [data]);
+    }, [teamData, projectData]);
 
     if (loading) {
-        return <Loading opacify fixed />;
+        return <Loading opacify />;
     }
 
     if (error) {

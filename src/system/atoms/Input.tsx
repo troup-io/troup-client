@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { TextInput, TextInputProps } from '@primer/components';
 
-import { color, rgba, padding, borderRadius, boxShadow } from '@styled/helper';
+import { color, rgba, padding, borderRadius } from '@styled/helper';
 
 type InputProps = TextInputProps & {
     isVerified?: boolean;
@@ -24,9 +24,9 @@ export const Input = styled(TextInput)<InputProps>`
     width: 100%;
     height: ${(props): any => (props.label ? '54px' : '49px')};
     ${(props): any => (props.label ? padding(2.25, 1.25, 0.75) : padding(1.25))};
-    color: ${color('defaultText')};
-    background: ${color('light')};
-    border: 2px solid ${rgba('defaultBorder', 0.1)};
+    color: ${color('light')};
+    background: ${color('darker')};
+    border: 2px solid transparent;
     ${borderRadius(1)};
     box-shadow: none;
     transition: all 0.25s ease;
@@ -45,11 +45,11 @@ export const Input = styled(TextInput)<InputProps>`
         top: 12px;
         left: 1px;
         ${padding(0, 0, 0, 1.25)};
+        color: ${color('darkDim')};
         font-size: 0.65em;
         font-weight: 900;
         line-height: 1;
         text-transform: uppercase;
-        opacity: 0.5;
         user-select: none;
     }
 
@@ -59,12 +59,10 @@ export const Input = styled(TextInput)<InputProps>`
 
     &:hover {
         border-color: ${rgba('defaultBorder', 0.2)};
-        ${boxShadow()};
     }
 
     &:focus-within {
         border-color: ${rgba('primaryDark', 0.5)};
-        ${boxShadow(0.3, 'primaryDark')};
     }
 
     ${(props): any => props.isVerified && verifiedStyled('success')}

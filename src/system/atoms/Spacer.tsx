@@ -4,17 +4,17 @@ import { Box } from '@primer/components';
 
 interface SpacerProps {
     gap?: number;
+    flow?: 'row' | 'column';
 }
 
 export const Spacer = styled(Box)<SpacerProps>`
     display: grid;
-    width: max-content;
-    height: max-content;
     grid-template-rows: ${(props): string =>
-        React.Children.map(props.children, () => 'auto').join(' ')};
+        React.Children.map(props.children, () => 'max-content').join(' ')};
     row-gap: ${(props): number => props.gap}px;
 `;
 
 Spacer.defaultProps = {
     gap: 10,
+    flow: 'row',
 };

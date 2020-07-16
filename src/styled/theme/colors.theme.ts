@@ -1,4 +1,4 @@
-import { rgba, desaturate, darken } from 'polished';
+import { rgba, desaturate, darken, lighten } from 'polished';
 
 // Base schemes
 const white = '#FFF';
@@ -37,9 +37,9 @@ const danger = '#EC6363';
 // Default schemes
 const defaultText = darkDim;
 const defaultBg = 'transparent';
-const defaultBorder = darkDim;
+const defaultBorder = dim;
 const disabledText = darkDimmer;
-const disabledBg = dim;
+const disabledBg = dark;
 
 export const defaultColors = {
     white,
@@ -66,6 +66,7 @@ export const defaultColors = {
     disabledText,
     disabledBg,
     base: darkest,
+    baseLight: lighten(0.05, darkest),
 };
 
 export type ColorsType = keyof typeof defaultColors;

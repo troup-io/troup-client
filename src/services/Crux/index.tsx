@@ -7,30 +7,33 @@ import { CruxContext, CruxContextType } from '@services/CruxContext';
 
 import { useQuery } from '@hooks/useQuery';
 
-import { getTokenFromCookie } from '@utils';
+import { getTokenFromCookie, embedToken } from '@utils';
 import { CruxWrapper } from './CruxWrapper';
 
-const CruxInner: React.FC = ({ children }) => {
+export const Crux: React.FC<{ token?: string }> = ({ children, token }) => {
     const hasToken = !!getTokenFromCookie();
     const {
         query: { team: name },
     } = useRouter();
     const { data: user, error: userError, loading: userLoading } = useQuery(GET_USER_DETAILS, {
         skip: !hasToken,
+        ...embedToken(token),
     });
     const { data: team, error: teamError, loading: teamLoading } = useQuery(GET_TEAM_BY_NAME, {
         variables: {
             name,
         },
         skip: !name || !hasToken,
+        ...embedToken(token),
     });
 
     const cruxData = useMemo<CruxContextType>(
         () => ({
             user,
             team,
+            token,
         }),
-        [user, team]
+        [user, team, token]
     );
 
     return (
@@ -45,5 +48,3 @@ const CruxInner: React.FC = ({ children }) => {
         </CruxContext.Provider>
     );
 };
-
-export const Crux = CruxInner;
