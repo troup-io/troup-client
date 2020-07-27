@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { AppRoutes } from 'routing/Routes';
+
+import { Apollo } from 'services/Apollo';
+
+import { GlobalStyles } from 'styled';
+import { theme } from 'styled/theme';
+import { Crux } from 'services/Crux';
+
+export default function App(): JSX.Element {
+    return (
+        <BrowserRouter>
+            <Apollo>
+                <ThemeProvider theme={theme}>
+                    <GlobalStyles />
+                    <Crux>
+                        <AppRoutes />
+                    </Crux>
+                </ThemeProvider>
+            </Apollo>
+        </BrowserRouter>
+    );
 }
-
-export default App;

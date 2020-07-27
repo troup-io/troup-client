@@ -1,44 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center"><img src="https://repository-images.githubusercontent.com/259775937/548b6b00-9a47-11ea-864f-a6d905f657c6" alt="troup-banner" width="300" /></p>
 
-## Available Scripts
+# Troup Client
 
-In the project directory, you can run:
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/troup) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) [![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat)](https://www.firsttimersonly.com/)
 
-### `yarn start`
+> ### 📢 We are looking for contributors!
+>
+> This project is under heavy development and is on the lookout for contributors both technical and non-technical. If you are interested in understanding the product and contributing, do get in touch at hello@troupapp.com.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The Troup client is the frontend app that helps the user address problems that we aim to solve. The client is built atop wonderful open-source projects with the goal of providing a fluid experience to the user.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+**Languages:**
 
-### `yarn test`
+-   [Typescript][typescript]
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Libraries:**
+
+-   [React][react]
+-   [Apollo Client][apollo-client]
+
+**Design system:**
+
+-   [Styled Components][styled-components]
+-   [Primer Components][primer-components]
+
+## Setting up environment variables
+
+You will need to create a `.env` file in the root folder. The instructions on setting those up are available within this example:
+
+-   [Root environment variables](https://github.com/troup-io/troup-client/blob/master/example.env)
+
+## Available scripts
+
+### `yarn dev`
+
+Start the development server and watch for file changes.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Build the production-optimised bundle for deployment.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### `yarn start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Deploy the production-optimised bundle locally to test and simulate the production environment.
 
-### `yarn eject`
+### `yarn codegen`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Generate the types from the server. If you have the Apollo plugin for VS Code it should do this automatically, but this generation is an alternate way of generating the code.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `yarn lint`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Run the linter, catching out any errors or warning that may occur.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[typescript]: https://www.typescriptlang.org/
+[react]: https://www.reactjs.org
+[apollo-client]: https://www.apollographql.com/docs/react/v3.0-beta
+[styled-components]: https://styled-components.com/
+[primer-components]: https://primer.style/

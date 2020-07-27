@@ -37,8 +37,8 @@
         "**/.next": true,
         "**/yarn.lock": true,
         "**/yarn-error.log": true,
-        "**/server-types": true,
-        "**/__generated__": true
+        "**/server-types": false,
+        "**/__generated__": false
     },
     "search.exclude": {
         "**/node_modules": true,
