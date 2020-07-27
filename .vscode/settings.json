@@ -1,0 +1,53 @@
+{
+    "npm.packageManager": "yarn",
+    "task.autoDetect": "off",
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#4FACFE",
+        "titleBar.activeForeground": "#323339",
+        "titleBar.inactiveBackground": "#3870a1"
+    },
+    "editor.colorDecorators": true,
+    "editor.rulers": [
+        { "column": 80, "color": "#704e0358" },
+        { "column": 100, "color": "#9c040488" }
+    ],
+    "eslint.validate": ["typescript", "typescriptreact", "json"],
+    "eslint.packageManager": "yarn",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true
+    },
+    "timeline.showView": true,
+    "npm.autoDetect": "off",
+    "npm.fetchOnlinePackageInfo": true,
+    "files.associations": {
+        "*rc": "json"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/.next": true,
+        "**/yarn.lock": true,
+        "**/yarn-error.log": true,
+        "**/server-types": true,
+        "**/__generated__": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/yarn.lock": true,
+        "**/.eslintrc": true,
+        "**/cmd": true,
+        "**/server-types": true,
+        "**/__generated__": true
+    }
+}
