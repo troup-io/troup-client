@@ -1,6 +1,7 @@
 import { ApolloError } from '@apollo/client';
 import Cookies from 'js-cookie';
 import { Location } from 'history';
+import moment from 'moment';
 
 export function popSingular<T>(data: T): T {
     if (data) {
@@ -69,4 +70,14 @@ export function embedToken(token?: string): any {
             },
         },
     };
+}
+
+export function dateDifference(date: string): string {
+    const d = moment(date);
+
+    if (d.diff(Date.now(), 'days') > 7) {
+        return `on ${d.format('D MMM YYYY')}`;
+    }
+
+    return d.fromNow();
 }
