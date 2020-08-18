@@ -6,12 +6,15 @@ import { PrivateRoute } from './PrivateRoute';
 
 import { Login } from 'components/Login';
 import { Signup } from 'components/Signup';
-// import { TeamRedirect } from 'components/Dashboard/TeamRedirect';
-// import { DashboardRedirect } from 'components/Dashboard/DashboardRedirect';
 import { Dashboard } from 'components/Dashboard';
 import { Projects } from 'components/Projects';
-import { DefaultError } from 'components/DefaultError';
 import { Team } from 'components/Team';
+import { ProjectsCreate } from 'components/Projects/ProjectsCreate';
+import { ProjectsRedirect } from 'components/Projects/ProjectsRedirect';
+import { Tickets } from 'components/Tickets';
+import { Ticket } from 'components/Ticket';
+import { TicketsCreate } from 'components/Tickets/TicketsCreate';
+// import { TicketsCreate } from 'components/Ticket/TicketCreate';
 
 export const AppRoutes: React.FC = () => {
     return (
@@ -21,14 +24,18 @@ export const AppRoutes: React.FC = () => {
             <PrivateRoute path="/" element={<Dashboard />} />
             <PrivateRoute path=":team" element={<Team />}>
                 <PrivateRoute path="projects" element={<Projects />} />
-                <PrivateRoute path="projects/:sequence" element={<Projects />}>
-                    <PrivateRoute
-                        path="ticket/:number"
-                        element={<>showing ticket stuff guuurrrrlllll!</>}
-                    />
+                <PrivateRoute path="projects/create" element={<ProjectsCreate />} />
+                <PrivateRoute path="projects/:projectSequence" element={<ProjectsRedirect />}>
+                    <PrivateRoute path="tickets" element={<Tickets />} />
+                    <PrivateRoute path="tickets/create" element={<TicketsCreate />} />
+                    <PrivateRoute path="tickets/:ticketSequence" element={<Ticket />} />
+                    {/* <PrivateRoute path="tickets" element={<Tickets />}> */}
+                    {/* <PrivateRoute path=":ticketSequence" element={<Ticket />} /> */}
+                    {/* </PrivateRoute> */}
+                    {/* </PrivateRoute> */}
+                    {/* <PublicRoute path="/*" element={<DefaultError status={404} />} /> */}
                 </PrivateRoute>
             </PrivateRoute>
-            {/* <PublicRoute path="*" */}
             {/* <PrivateRoute path=":team" element={<DashboardRedirect />} /> */}
             {/* <PrivateRoute path=":team/projects" element={<DashboardRedirect />} /> */}
             {/* <PrivateRoute path=":team/projects/:sequence" element={<Projects />} /> */}
