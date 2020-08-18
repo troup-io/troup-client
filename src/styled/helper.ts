@@ -88,6 +88,8 @@ export const boxShadow = (value?: number, color?: ColorsType) => (): any => css`
     box-shadow: 0 2px 5px 1px ${rgba(color ?? 'defaultBorder', value ?? 0.2)};
 `;
 
-export const transition = (property: string) => (): any => css`
-    transition: ${property} 0.25s linear;
+export const transition = (property: string | string[]) => (): any => css`
+    transition: ${Array.isArray(property)
+        ? property.map((p) => `${property} 0.25s linear`).join(', ')
+        : `${property} 0.25s linear`};
 `;
