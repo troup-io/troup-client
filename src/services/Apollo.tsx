@@ -1,44 +1,23 @@
 import React, { useMemo } from 'react';
-import {
-    ApolloClient,
-    InMemoryCache,
-    HttpLink,
-    ApolloLink,
-    concat,
-    ApolloProvider,
-} from '@apollo/client';
-
-import { useAuth } from 'hooks/useAuth';
+import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider } from '@apollo/client';
 
 let apolloClient: ApolloClient<any>;
 
-function createApolloClient(token?: string): ApolloClient<any> {
+function createApolloClient(): ApolloClient<any> {
     return new ApolloClient({
         ssrMode: typeof window === 'undefined',
-        link: concat(
-            new ApolloLink((operation, forward) => {
-                if (token) {
-                    operation.setContext({
-                        headers: {
-                            authorization: token ? `Bearer ${token.replace(/"/g, '')}` : null,
-                        },
-                    });
-                }
-
-                return forward(operation);
-            }),
-            new HttpLink({
-                uri: process.env.REACT_APP_ENDPOINT, // Server URL (must be absolute)
-                // credentials: 'include', // Additional fetch() options like `credentials` or `headers`
-                fetch,
-            })
-        ),
+        connectToDevTools: true,
+        link: new HttpLink({
+            uri: process.env.REACT_APP_ENDPOINT, // Server URL (must be absolute)
+            // credentials: 'include', // Additional fetch() options like `credentials` or `headers`
+            fetch,
+        }),
         cache: new InMemoryCache(),
     });
 }
 
-export function initializeApollo(initialState = null, token?: string): ApolloClient<any> {
-    const _apolloClient = createApolloClient(token);
+export function initializeApollo(initialState = null): ApolloClient<any> {
+    const _apolloClient = createApolloClient();
 
     // If your page has Next.js data fetching methods that use Apollo Client, the initial state
     // gets hydrated here
@@ -54,8 +33,7 @@ export function initializeApollo(initialState = null, token?: string): ApolloCli
 }
 
 export function useApollo(initialState?: any): ApolloClient<any> {
-    const { token } = useAuth();
-    const store = useMemo(() => initializeApollo(initialState, token ?? ''), [initialState, token]);
+    const store = useMemo(() => initializeApollo(initialState), [initialState]);
     return store;
 }
 
