@@ -20,7 +20,7 @@ export const useAuth = (): UseAuthInterface => {
     const login = useRef((token: string) => {
         Cookie.set('token', token, { expires: 7, sameSite: 'strict' });
         setToken(token);
-        navigate(location.state.from || '/');
+        navigate(location.state?.from || '/');
     });
 
     const logout = useRef(() => {
