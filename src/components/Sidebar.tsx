@@ -2,14 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Flex } from '@primer/components';
 import styled from 'styled-components';
-import {
-    FolderOutline,
-    ListOutline,
-    PeopleOutline,
-    LayersOutline,
-    Settings2Outline,
-    LogOutOutline,
-} from '@styled-icons/evaicons-outline';
+import { Folder, List, Users, LayerGroup, Cog, SignOutAlt } from '@styled-icons/fa-solid';
 
 import { useCrux } from 'hooks/useCrux';
 import { useAuth } from 'hooks/useAuth';
@@ -24,13 +17,12 @@ import { LogoIcon } from 'components/Logo';
 import { padding, color, transition, margin, borderRadius } from 'styled/helper';
 
 const SidebarWrapper = styled(Flex)`
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    ${padding(1, 0)};
+    ${padding(1)};
     background: ${color('baseLight')};
-    border-right: 2px solid ${color('base')};
+    border-bottom: 2px solid ${color('base')};
 `;
 
 const SidebarSection = styled(Spacer)`
@@ -42,7 +34,8 @@ const SidebarSection = styled(Spacer)`
 
     > a {
         display: flex;
-        width: 100%;
+        justify-self: stretch;
+        height: 100%;
         ${padding(0, 1)};
     }
 `;
@@ -53,32 +46,40 @@ const SidebarLink = styled.span<{ selected?: boolean }>`
     flex-grow: 1;
     align-items: center;
     justify-content: center;
-    align-self: stretch;
-    height: 35px;
-    ${margin(0, -1)};
-    ${padding(0, 1)};
+    justify-self: stretch;
+    height: 150%;
+    ${margin(-1, 0)};
+    ${padding(1, 0.5)};
+    color: ${(props) => (props.selected ? color('primaryDark') : color('darkDim'))};
     line-height: normal;
     ${transition('all')};
     cursor: pointer;
 
-    &:hover svg {
+    &:hover {
         color: ${(props) => (props.selected ? color('primaryDark') : color('light'))};
+
+        svg {
+            color: ${(props) => (props.selected ? color('primaryDark') : color('light'))};
+        }
     }
 
     svg {
+        ${margin(-0.25, 1, 0, 0)};
         color: ${(props) => (props.selected ? color('primaryDark') : color('darkDim'))};
+        ${transition('all')};
     }
 
     &:before {
         content: '';
         position: absolute;
         top: 0;
-        bottom: 0;
+        right: 0;
         left: 0;
         display: block;
-        width: 5px;
+        height: 5px;
         background: ${(props) => (props.selected ? color('primaryDark') : 'transparent')};
-        ${borderRadius(0, 1, 1, 0)};
+        ${borderRadius(0, 0, 1, 1)};
+        ${transition('background')};
     }
 `;
 
@@ -102,28 +103,28 @@ export default function Sidebar(): JSX.Element {
 
     return (
         <SidebarWrapper>
-            <SidebarSection gap={30}>
+            <SidebarSection gap={30} row>
                 <Link to={formLink('')}>
                     <LogoIcon />
                 </Link>
                 <Link to={formLink('projects')}>
                     <SidebarLink selected={currentItem === 'projects'}>
-                        <FolderOutline height={25} width={25} />
+                        <Folder height={20} width={20} /> Projects
                     </SidebarLink>
                 </Link>
                 <Link to={formLink('boards')}>
                     <SidebarLink selected={currentItem === 'boards'}>
-                        <ListOutline height={25} width={25} />
+                        <List height={20} width={20} /> Boards
                     </SidebarLink>
                 </Link>
                 <Link to={formLink('users')}>
                     <SidebarLink selected={currentItem === 'users'}>
-                        <PeopleOutline height={25} width={25} />
+                        <Users height={20} width={20} /> Users
                     </SidebarLink>
                 </Link>
                 <Link to={formLink('integrations')}>
                     <SidebarLink selected={currentItem === 'integrations'}>
-                        <LayersOutline height={25} width={25} />
+                        <LayerGroup height={20} width={20} /> Integrations
                     </SidebarLink>
                 </Link>
             </SidebarSection>
@@ -132,13 +133,13 @@ export default function Sidebar(): JSX.Element {
                     <summary>
                         <AvatarText size={40}>{avatarChar}</AvatarText>
                     </summary>
-                    <DropdownMenu direction="ne">
+                    <DropdownMenu direction="sw">
                         <DropdownItem onClick={logout}>
-                            <LogOutOutline height={15} width={15} style={{ marginRight: 10 }} />
+                            <SignOutAlt height={15} width={15} style={{ marginRight: 10 }} />
                             Logout
                         </DropdownItem>
                         <DropdownItem>
-                            <Settings2Outline height={15} width={15} style={{ marginRight: 10 }} />
+                            <Cog height={15} width={15} style={{ marginRight: 10 }} />
                             Settings
                         </DropdownItem>
                     </DropdownMenu>

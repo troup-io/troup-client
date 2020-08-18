@@ -12,22 +12,18 @@ import { CruxWrapper } from './CruxWrapper';
 
 import { extractTeamNameFromURL } from 'utils';
 
-// import { embedToken } from 'utils';
-
 export const Crux: React.FC = ({ children }) => {
     const { authenticated, token } = useAuth();
     const loc = useLocation();
     const name = extractTeamNameFromURL(loc);
     const { data: user, error: userError, loading: userLoading } = useQuery(GET_USER_DETAILS, {
         skip: !authenticated,
-        // ...embedToken(token || ''),
     });
     const { data: team, error: teamError, loading: teamLoading } = useQuery(GET_TEAM_BY_NAME, {
         variables: {
             name,
         },
         skip: !name || !authenticated,
-        // ...embedToken(token || ''),
     });
 
     const cruxData = useMemo<CruxContextType>(

@@ -31,7 +31,7 @@ export const CruxWrapper: React.FC<{ userError: any; teamError: any; loading: bo
         }
 
         if (userError) {
-            return <DefaultError status={500} />;
+            return <DefaultError status={500} message={userError.message} />;
         }
 
         if (teamError) {
@@ -42,7 +42,11 @@ export const CruxWrapper: React.FC<{ userError: any; teamError: any; loading: bo
     };
 
     return (
-        <Grid gridTemplateColumns={isInnerRoute ? 'max-content auto' : 'auto'} height="100%">
+        <Grid
+            gridTemplateRows={isInnerRoute ? 'max-content auto' : 'auto'}
+            height="100%"
+            width="100%"
+        >
             {isInnerRoute && <Sidebar />}
             <ComponentWrapper>{renderComponent()}</ComponentWrapper>
         </Grid>
