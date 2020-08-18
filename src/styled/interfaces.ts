@@ -7,6 +7,7 @@ export enum Variants {
     warning = 'warning',
     panic = 'panic',
     danger = 'danger',
+    dark = 'dark',
 }
 
 export type VariantsType = keyof typeof Variants;

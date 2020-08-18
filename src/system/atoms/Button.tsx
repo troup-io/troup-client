@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { Button as _Button, ButtonProps as PrimerButtonprops } from '@primer/components';
 
 import { VariantsType } from 'styled/interfaces';
-import { color, darken } from 'styled/helper';
+import { color, darken, transition } from 'styled/helper';
 import { getVariantStyle } from 'styled/util';
 
 export type ButtonProps = PrimerButtonprops & {
@@ -11,7 +11,8 @@ export type ButtonProps = PrimerButtonprops & {
 
 const commons = css<ButtonProps>`
     ${(props) => props.fullWidth && 'width: 100%'};
-    border: none;
+    font-weight: 500;
+    border: 0;
     box-shadow: none;
     transition: all 0.25s ease;
 
@@ -40,6 +41,7 @@ const variantStyle = (variant: VariantsType): any => {
         border: 1px solid transparent;
         color: ${color(altColor)};
         background: ${color(mainColor)};
+        ${transition(['color', 'background'])};
 
         &:hover {
             background: ${darken(mainColor, 0.1)};
@@ -58,31 +60,7 @@ const variantStyle = (variant: VariantsType): any => {
 };
 
 export const Button = styled(_Button)<ButtonProps>`
-    color: ${color('defaultText')};
-    background: transparent;
-    border: 1px solid ${color('defaultBorder')};
-
-    &:hover {
-        color: ${color('primaryDark')};
-        background: transparent;
-        border-color: ${color('primaryDark')};
-    }
-
-    &:focus,
-    &:active {
-        color: ${color('light')};
-        border-color: transparent;
-    }
-
-    &:focus {
-        background: ${color('primaryDark')};
-    }
-
-    &:active {
-        background: ${darken('primaryDark', 0.2)};
-    }
-
-    ${commons};
+    ${variantStyle('default')};
 `;
 
 export const ButtonPrimary = styled(_Button)<ButtonProps>`

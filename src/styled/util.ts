@@ -13,7 +13,7 @@ export const getVariantStyle = (
         }
 
         case Variants.default: {
-            bg = 'darkDim';
+            bg = 'darker';
             fg = 'darkDim';
             break;
         }
