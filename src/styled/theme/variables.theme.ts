@@ -19,6 +19,7 @@ const variables = {
         lg: `@media (min-width: ${sizes.large}) and (max-width: ${manip(sizes.xlarge)})`,
         xl: `@media (min-width: ${sizes.xlarge})`,
     },
+    contentWidth: '800px',
 };
 
 export default variables;

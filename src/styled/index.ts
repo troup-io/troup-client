@@ -10,7 +10,8 @@ export const GlobalStyles = createGlobalStyle`
         width: 100%;
         height: 100%;
         color: ${color('light')};
-        font-family: 'Lato', sans-serif;
+        font-family: 'Alegreya Sans', sans-serif;
+        font-weight: 300;
         background: ${color('base')};
     }
 
@@ -42,5 +43,19 @@ export const GlobalStyles = createGlobalStyle`
 
     h1, h2, h3, h4, h5, h6 {
         font-family: "DM Sans", sans-serif;
+        font-weight: 500;
+    }
+
+    b, strong {
+        font-weight: 700;
+    }
+
+    .slate-BalloonToolbar {
+        position: fixed;
+        z-index: -1;
+
+        &[style] {
+            z-index: 9999;
+        }
     }
 `;
