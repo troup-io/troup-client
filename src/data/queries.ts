@@ -27,8 +27,32 @@ export const GET_PROJECTS = gql`
     query GetProjects {
         projects {
             id
-            name
             sequence
+            name
+            createdAt
+        }
+    }
+`;
+
+export const GET_TICKETS = gql`
+    query GetTickets($projectSequence: Int!) {
+        tickets(projectSequence: $projectSequence) {
+            id
+            sequence
+            createdAt
+            title
+            author {
+                profile {
+                    firstName
+                    lastName
+                }
+            }
+            labels {
+                id
+                foreground
+                background
+                value
+            }
         }
     }
 `;
