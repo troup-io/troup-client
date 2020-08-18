@@ -20,7 +20,7 @@ const LoadingWrapper = styled(Flex)<LoadingProps>`
     left: 0;
     width: 100%;
     height: 100%;
-    background: ${(props) => rgba('light', props.opacify ? 1 : 0.75)};
+    background: ${(props) => rgba('base', props.opacify ? 1 : 0.75)};
     z-index: 999;
 `;
 
