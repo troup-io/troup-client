@@ -21,8 +21,12 @@ export const DropdownMenu = styled(_Dropdown.Menu)`
     ${borderRadius(1)};
     box-shadow: none;
 
-    &:after {
+    &[direction='ne']:after {
         border-top-color: ${color('darker')};
+    }
+
+    &[direction='sw']:after {
+        border-bottom-color: ${color('darker')};
     }
 `;
 
