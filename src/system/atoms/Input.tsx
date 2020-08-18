@@ -54,7 +54,7 @@ export const Input = styled(TextInput)<InputProps>`
     }
 
     > input::placeholder {
-        color: ${color('darkDimmer')};
+        color: ${color('darkDim')};
     }
 
     &:hover {
